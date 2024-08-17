@@ -47,9 +47,11 @@ export  default function TypeWriterInitialText() {
 
     return (
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-            <h1 className="flex items-center text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-                <TypewriterEffect words={words}/>
-            </h1>
+                <TypewriterEffect
+                    words={words}
+                    textSize="text-4xl sm:text-4xl md:text-6xl lg:text-5xl xl:text-7xl"
+                    className="leading-tight"
+                />
         </div>
     );
 }

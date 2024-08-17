@@ -8,19 +8,21 @@ export const TypewriterEffect = ({
                                      words,
                                      className,
                                      cursorClassName,
+                                     textSize = "text-base sm:text-xl md:text-3xl lg:text-5xl", // Default size classes
                                  }: {
     words: {
         text: { text: string; color?: string }[];
     }[];
     className?: string;
     cursorClassName?: string;
+    textSize?: string; // New prop for text size
 }) => {
     const [scope, animate] = useAnimate();
     const isInView = useInView(scope);
 
     useEffect(() => {
         if (isInView) {
-           void animate(
+            void animate(
                 "span",
                 {
                     display: "inline-block",
@@ -45,8 +47,8 @@ export const TypewriterEffect = ({
                                 initial={{}}
                                 key={`char-${wordIdx}-${charIdx}`}
                                 className={cn(
-                                    "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold",
-                                    "opacity-0 hidden",
+                                    textSize, // Apply the new textSize prop
+                                    "font-bold opacity-0 hidden",
                                     char.color
                                 )}
                             >
@@ -63,7 +65,8 @@ export const TypewriterEffect = ({
     return (
         <div
             className={cn(
-                "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
+                textSize, // Apply the new textSize prop to the container as well
+                "font-bold text-center",
                 className
             )}
         >
