@@ -30,10 +30,10 @@ export default function HomePage() {
         <TypeWriterInitialText />
       </div>
       {showMenu && <DesktopMenu />}
-      {/* Add more content here to enable scrolling */}
+
       <div className="bg-background-black h-[200vh]">
-        {/* Your additional content goes here */}
       </div>
+
     </main>
   );
 }
