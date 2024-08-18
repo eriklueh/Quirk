@@ -15,7 +15,7 @@ export const TypewriterEffect = ({
     }[];
     className?: string;
     cursorClassName?: string;
-    textSize?: string; // New prop for text size
+    textSize?: string;
 }) => {
     const [scope, animate] = useAnimate();
     const isInView = useInView(scope);
@@ -47,7 +47,7 @@ export const TypewriterEffect = ({
                                 initial={{}}
                                 key={`char-${wordIdx}-${charIdx}`}
                                 className={cn(
-                                    textSize, // Apply the new textSize prop
+                                    textSize,
                                     "font-bold opacity-0 hidden",
                                     char.color
                                 )}
@@ -65,7 +65,7 @@ export const TypewriterEffect = ({
     return (
         <div
             className={cn(
-                textSize, // Apply the new textSize prop to the container as well
+                textSize,
                 "font-bold text-center",
                 className
             )}
@@ -80,7 +80,7 @@ export const TypewriterEffect = ({
                     repeatType: "reverse",
                 }}
                 className={cn(
-                    "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
+                    "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-primary-magenta",
                     cursorClassName
                 )}
             ></motion.span>
