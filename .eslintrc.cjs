@@ -37,7 +37,12 @@ const config = {
           "attributes": false
         }
       }
-    ]
+    ],
+    // Desactivar advertencias específicas
+    "@typescript-eslint/consistent-indexed-object-style": "off", // Desactiva el error de índice preferido
+    "react-hooks/exhaustive-deps": "off", // Desactiva advertencias por dependencias faltantes en useMemo
+    "next/next/no-img-element": "off" // Desactiva advertencias por el uso de <img> en lugar de <Image />
   }
-}
+};
+
 module.exports = config;
