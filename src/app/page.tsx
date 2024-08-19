@@ -47,6 +47,8 @@ export default function HomePage() {
         <div className="h-[50vh] bg-background-black ">
           <ParallaxSection/>
         </div>
+        <div className="h-[200vh] bg-background-black ">
+        </div>
       </main>
 
   );
