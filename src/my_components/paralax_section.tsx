@@ -30,7 +30,7 @@ const ParallaxSection = () => {
               mouseSpeed = 0.02;
               break;
             case 1:
-              scrollSpeed = 0.3;
+              scrollSpeed = 0.03;
               mouseSpeed = 0.04;
               break;
             case 2:
@@ -74,13 +74,13 @@ const ParallaxSection = () => {
         willChange: "transform",
       };
       return (
-          <img
-              key={index}
-              src={image}
-              alt={`Parallax Layer ${index}`}
-              style={style}
-              className="parallax-layer"
-          />
+        <img
+          key={index}
+          src={image}
+          alt={`Parallax Layer ${index}`}
+          style={style}
+          className="parallax-layer"
+        />
       );
     });
   };
@@ -95,7 +95,7 @@ const ParallaxSection = () => {
     }, //estrella 4 lados azul
     {
       left: "7%",
-      top: "50%",
+      top: "80%",
       rotate: "-10deg",
       height: "100px",
       filter: "blur(3px)",
@@ -122,26 +122,46 @@ const ParallaxSection = () => {
       top: "0%",
       rotate: "-10deg",
       height: "540px",
-      filter: "blur(1px)",
+      filter: "blur(3px)",
     }, //óvalo de la esquina superior izquierda
     {
       left: "5%",
       top: "80%",
       rotate: "30deg",
       height: "350px",
-      filter: "blur(1px)",
-    },
+      filter: "blur(2px)",
+    }, //estrella naranja
     {
-      left: "-5%",
-      top: "0%",
-      rotate: "-10deg",
+      left: "30%",
+      top: "60%",
+      rotate: "120deg",
       height: "540px",
-      filter: "blur(1px)",
-    },
+      filter: "blur(5px)",
+    }, //ovalo de abajo
   ];
 
   const thirdLayerStyles = [
-    { left: "78%", top: "30%", rotate: "-10deg", height: "600px" },
+    {
+      left: "78%",
+      top: "30%",
+      rotate: "-10deg",
+      height: "600px",
+      filter: " blur(5px)",
+    },
+    {
+      left: "40%",
+      top: "-5%",
+      rotate: "30deg",
+      height: "500px",
+      filter: "drop-shadow(15px 0px 5px magenta) blur(2px)",
+    },
+    {
+      left: "80%",
+      top: "25%",
+      rotate: "20deg",
+      height: "100px",
+      filter: "drop-shadow(5px 0px 1px magenta) blur(1px)",
+    },
   ];
 
   const firstLayerImages = [
@@ -151,9 +171,17 @@ const ParallaxSection = () => {
     "assets/stars/Asset 28.png",
   ];
 
-  const secondLayerImages = ["assets/circles/Asset 15.png", "assets/stars/Asset 25.png"];
+  const secondLayerImages = [
+    "assets/circles/Asset 15.png",
+    "assets/stars/Asset 25.png",
+    "assets/circles/Asset 13.png",
+  ];
 
-  const thirdLayerImages = ["assets/zig/Asset 10.png"];
+  const thirdLayerImages = [
+    "assets/zig/Asset 10.png",
+    "assets/zig/Asset 1.png",
+    "assets/stars/Asset 28.png",
+  ];
 
   const memoizedLayers = useMemo(
     () => [
@@ -167,12 +195,22 @@ const ParallaxSection = () => {
   return (
       <div
           ref={parallaxRef}
-          className="relative h-screen overflow-hidden bg-black"
+          className="relative h-screen overflow-hidden"
       >
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <div
+              style={{
+                height: '100px',
+                width: '100%',
+                background: 'linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)',
+                WebkitBackdropFilter: 'blur(50px)',
+              }}
+          />
+        </div>
         <div className="parallax-layer absolute inset-0">{memoizedLayers[0]}</div>
         <div className="parallax-layer absolute inset-0 flex items-center justify-center">
           {memoizedLayers[1]}
-          <div className="z-10 p-4">
+          <div className="z-20 p-4">
             <img
                 src="/assets/large_logo.png"
                 alt="logo"
@@ -182,6 +220,7 @@ const ParallaxSection = () => {
         </div>
         <div className="parallax-layer absolute inset-0">{memoizedLayers[2]}</div>
       </div>
+
   );
 };
 

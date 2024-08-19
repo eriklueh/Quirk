@@ -26,6 +26,7 @@ export default {
         background: {
           black: "#000000", // Fondo negro
         },
+
       },
     },
   },
