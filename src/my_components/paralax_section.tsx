@@ -114,22 +114,22 @@ const ParallaxSection: React.FC = () => {
   ];
 
   const firstLayerStyles: Styles[] = [
-    { left: "15%", top: "25%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
-    { left: "7%", top: "80%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
-    { left: "73%", top: "30%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
-    { left: "43%", top: "70%", rotate: "-15deg", height: "100px", filter: "blur(3px)" },
+    { left: "10%", top: "20%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
+    { left: "10%", top: "110%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
+    { left: "73%", top: "45%", rotate: "-10deg", height: "100px", filter: "blur(3px)" },
+    { left: "43%", top: "90%", rotate: "-15deg", height: "100px", filter: "blur(3px)" },
   ];
 
   const secondLayerStyles: Styles[] = [
-    { left: "-5%", top: "0%", rotate: "-10deg", height: "540px", filter: "blur(3px)" },
-    { left: "5%", top: "80%", rotate: "30deg", height: "350px", filter: "blur(2px)" },
+    { left: "-30%", top: "0%", rotate: "-10deg", height: "540px", filter: "blur(3px)" },
+    { left: "-12%", top: "100%", rotate: "30deg", height: "350px", filter: "blur(2px)" },
     { left: "30%", top: "55%", rotate: "120deg", height: "540px", filter: "blur(5px)" },
   ];
 
   const thirdLayerStyles: Styles[] = [
-    { left: "78%", top: "40%", rotate: "-10deg", height: "600px", filter: "blur(5px)" },
-    { left: "40%", top: "0%", rotate: "30deg", height: "500px", filter: "drop-shadow(15px 0px 5px magenta) blur(2px)" },
-    { left: "80%", top: "25%", rotate: "20deg", height: "100px", filter: "drop-shadow(5px 0px 1px magenta) blur(1px)" },
+    { left: "78%", top: "65%", rotate: "-10deg", height: "600px", filter: "blur(5px)" },
+    { left: "40%", top: "5%", rotate: "30deg", height: "500px", filter: "drop-shadow(15px 0px 5px magenta) blur(2px)" },
+    { left: "80%", top: "45%", rotate: "20deg", height: "100px", filter: "drop-shadow(5px 0px 1px magenta) blur(1px)" },
   ];
 
   const memoizedLayers = useMemo(
@@ -144,7 +144,7 @@ const ParallaxSection: React.FC = () => {
   return (
       <div
           ref={parallaxRef}
-          className="relative h-screen overflow-hidden"
+          className="relative h-screen overflow-hidden  flex items-center justify-center"
       >
         <div className="absolute inset-0 z-10 pointer-events-none">
           <div
@@ -167,9 +167,9 @@ const ParallaxSection: React.FC = () => {
           />
         </div>
         <div className="parallax-layer absolute inset-0">{memoizedLayers[0]}</div>
-        <div className="parallax-layer absolute inset-0 flex items-center justify-center">
+        <div className="parallax-layer absolute top-56 flex items-center justify-center ">
           {memoizedLayers[1]}
-          <div className="z-20 p-4">
+          <div className="z-20">
             <img
                 src="/assets/large_logo.png"
                 alt="logo"
@@ -179,6 +179,7 @@ const ParallaxSection: React.FC = () => {
         </div>
         <div className="parallax-layer absolute inset-0">{memoizedLayers[2]}</div>
       </div>
+
   );
 };
 

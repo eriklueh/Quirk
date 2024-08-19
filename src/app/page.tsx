@@ -35,20 +35,19 @@ export default function HomePage() {
   }, []);
 
   return (
-      <main className="flex min-h-screen flex-col bg-background-black">
-          <div className="flex-grow flex justify-center items-center">
-              <div className="flex h-screen items-center justify-center" ref={typewriterRef}>
-                  <TypeWriterInitialText/>
-              </div>
+    <main className="flex min-h-screen flex-col bg-background-black">
+      <div className="flex flex-grow items-center justify-center">
+        <div
+          className="flex h-screen items-center justify-center"
+          ref={typewriterRef}
+        >
+          <TypeWriterInitialText />
+        </div>
 
-              {isMobile ? <MobileMenu/> : showMenu && <DesktopMenu/>}
-          </div>
-          <div className="h-[50vh]  ">
-              <ParallaxSection/>
-          </div>
-          <div className="h-[200vh] bg-background-black  ">
-          </div>
-      </main>
-
+        {isMobile ? <MobileMenu /> : showMenu && <DesktopMenu />}
+      </div>
+      <ParallaxSection />
+      <div className="h-[200vh] bg-background-black"></div>
+    </main>
   );
 }
