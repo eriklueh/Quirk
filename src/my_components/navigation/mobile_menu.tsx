@@ -48,7 +48,7 @@ export const MobileMenu = () => {
       <AnimatePresence>
         {isDockVisible && (
           <motion.div
-              className="fixed bottom-4 -translate-x-1/2 w-[60vw]"
+              className="fixed z-50 bottom-4 -translate-x-1/2 w-[60vw]"
               initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
