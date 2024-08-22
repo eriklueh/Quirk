@@ -10,6 +10,7 @@ export default {
       },
       cursor: {
         fancy: "url(/cursor.cur), pointer",
+        pointer: "url(/cursor.cur), pointer",
       },
       colors: {
         primary: {
