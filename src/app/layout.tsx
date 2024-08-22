@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "/quirk_icon.ico",
+                url: "/quirk_icon.png",
                 width: 1200,
                 height: 630,
                 alt: "Quirk Preview Image",
