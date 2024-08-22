@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-urbanist)", ...fontFamily.sans],
       },
+      cursor: {
+        fancy: "url(/cursor.cur), pointer",
+      },
       colors: {
         primary: {
           green: "#d6fa02", // VERDE
@@ -26,7 +29,6 @@ export default {
         background: {
           black: "#000000", // Fondo negro
         },
-
       },
     },
   },
