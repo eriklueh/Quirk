@@ -7,6 +7,18 @@ export const metadata: Metadata = {
     title: "Quirk",
     description: "An experience by Quirks for Quirks",
     icons: [{ rel: "icon", url: "/quirk_icon.ico" }],
+    openGraph: {
+        title: "Quirk",
+        description: "An experience by Quirks for Quirks",
+        images: [
+            {
+                url: "/assets/large_logo.png",
+                width: 800,
+                height: 600,
+                alt: "Quirk Preview Image",
+            },
+        ],
+    },
 };
 
 const urbanist = Urbanist({
