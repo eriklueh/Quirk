@@ -30,7 +30,7 @@ const urbanist = Urbanist({
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en" className={`${urbanist.variable}`}>
+        <html lang="en" className={`${urbanist.variable} cursor-fancy`}>
         <body>{children}</body>
         </html>
     );
