@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 
-// Definir el tipo para card
 interface Card {
     dialog: string;
     letter: 'Q' | 'U' | 'I' | 'R' | 'K';
     color: string;
 }
 
-// Definir tipos para los props del componente
 interface CharacterDialogProps {
     card: Card | null;
     onClose: () => void;
