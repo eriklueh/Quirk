@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
+import React, { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { GlareCard } from "~/components/ui/glare-card";
 
 interface Card {
     dialog: string;
@@ -8,85 +8,78 @@ interface Card {
     color: string;
 }
 
-interface CharacterDialogProps {
+interface CharacterGlareCardProps {
     card: Card | null;
     onClose: () => void;
 }
 
-const CharacterDialog: React.FC<CharacterDialogProps> = ({ card, onClose }) => {
+const CharacterGlareCard: React.FC<CharacterGlareCardProps> = ({ card, onClose }) => {
     const [isOpen, setIsOpen] = useState(!!card);
+    const cardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        console.log("CharacterDialog mounted or updated");
+        console.log("CharacterGlareCard mounted or updated");
         setIsOpen(!!card);
     }, [card]);
 
-    const getBorderAndShadow = (letter: 'Q' | 'U' | 'I' | 'R' | 'K'): string => {
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+                onClose();
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [onClose]);
+
+    const getBorderColor = (letter: 'Q' | 'U' | 'I' | 'R' | 'K'): string => {
         switch (letter) {
-            case 'Q':
-                return 'border-neon-magenta shadow-neon-magenta';
-            case 'U':
-                return 'border-neon-green shadow-neon-green';
-            case 'I':
-                return 'border-neon-cyan shadow-neon-cyan';
-            case 'R':
-                return 'border-neon-brightViolet shadow-neon-brightViolet';
-            case 'K':
-                return 'border-neon-orange shadow-neon-orange';
-            default:
-                return 'border-gray-500 shadow-gray-500';
+            case 'Q': return 'border-neon-magenta';
+            case 'U': return 'border-neon-green';
+            case 'I': return 'border-neon-cyan';
+            case 'R': return 'border-neon-brightViolet';
+            case 'K': return 'border-neon-orange';
+            default: return 'border-gray-500';
         }
     };
 
-    const borderAndShadow = card ? getBorderAndShadow(card.letter) : '';
-
-    // Check if the borderAndShadow value is correct
-    console.log('borderAndShadow', borderAndShadow);
+    if (!card) return null;
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <Dialog
-                    open={isOpen}
-                    onClose={() => {
-                        console.log("Dialog Closed");
-                        onClose();
-                        setIsOpen(false);
-                    }}
-                    className="fixed inset-0 flex items-center justify-center"
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
                 >
                     <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.1 }}
-                        style={{ width: "1000px", height: "600px", borderRadius: "20px" }}
-                        className={`relative transition-all duration-300 ${borderAndShadow}`}
+                        ref={cardRef}
+                        initial={{ scale: 0.9 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
                     >
-                        <img
-                            src={card?.dialog}
-                            alt=""
-                            className={`w-full h-full object-cover rounded-3xl border-2 ${borderAndShadow}`}
-                            style={{
-                                borderRadius: "20px",
-                            }}
-                        />
-                        <button
-                            onClick={onClose}
-                            className="absolute top-2 right-2 text-white hover:text-gray-300"
-                            aria-label="Close"
-                        >
-                            &times;
-                        </button>
+                        <GlareCard width="1000px" height="600px">
+                            <div className={`relative w-full h-full rounded-3xl overflow-hidden ${getBorderColor(card.letter)}`}>
+                                <img
+                                    src={card.dialog}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </GlareCard>
                     </motion.div>
-                    <div className="fixed inset-0" onClick={() => {
-                        onClose();
-                        setIsOpen(false);
-                    }} />
-                </Dialog>
+                </motion.div>
             )}
         </AnimatePresence>
     );
 };
 
-export default CharacterDialog;
+export default CharacterGlareCard;
