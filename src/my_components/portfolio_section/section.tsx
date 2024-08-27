@@ -22,7 +22,13 @@ const PortfolioSection = () => {
           ref={ref}
           className="flex min-h-screen flex-col items-center justify-center bg-background-black p-4"
       >
-        <AnimatedText controls={controls} />
+        <AnimatedText
+            controls={controls}
+            primaryText="> NUESTRAS "
+            secondaryText="CREACIONES <"
+            primaryTextClassName="text-primary-magenta"
+            secondaryTextClassName="text-primary-green"
+        />
         <FileManager controls={controls} />
       </section>
   );
