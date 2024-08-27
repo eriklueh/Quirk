@@ -5,7 +5,7 @@ import TypeWriterInitialText from "~/my_components/type_writed_initial_text";
 import { DesktopMenu } from "~/my_components/navigation/desktop_menu";
 import { MobileMenu } from "~/my_components/navigation/mobile_menu";
 import ParallaxSection from "~/my_components/paralax_section";
-import PortfolioSection from "~/my_components/portfolio_section";
+import PortfolioSection from "~/my_components/portfolio_section/section";
 
 export default function HomePage() {
   const typewriterRef = useRef(null);
