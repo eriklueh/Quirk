@@ -3,9 +3,19 @@ import { FC } from "react";
 
 interface AnimatedTextProps {
     controls: AnimationControls;
+    primaryText: string;
+    secondaryText: string;
+    primaryTextClassName?: string;
+    secondaryTextClassName?: string;
 }
 
-const AnimatedText: FC<AnimatedTextProps> = ({ controls }) => {
+const AnimatedText: FC<AnimatedTextProps> = ({
+                                                 controls,
+                                                 primaryText,
+                                                 secondaryText,
+                                                 primaryTextClassName = "text-primary-magenta",
+                                                 secondaryTextClassName = "text-primary-green",
+                                             }) => {
     const textVariants = {
         hidden: { y: 50, opacity: 0 },
         visible: {
@@ -22,8 +32,8 @@ const AnimatedText: FC<AnimatedTextProps> = ({ controls }) => {
             variants={textVariants}
             className="mb-16 text-6xl font-bold text-white"
         >
-            <span className="text-primary-magenta">{"> NUESTRAS "}</span>
-            <span className="text-primary-green">{"CREACIONES <"}</span>
+            <span className={primaryTextClassName}>{primaryText}</span>
+            <span className={secondaryTextClassName}>{secondaryText}</span>
         </motion.h2>
     );
 };
