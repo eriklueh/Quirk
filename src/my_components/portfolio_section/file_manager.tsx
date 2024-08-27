@@ -59,10 +59,10 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
           variants={rectangleVariants}
           className="w-full max-w-2xl"
       >
-        <BackgroundGradient className="max-h-[500px] overflow-hidden">
+        <BackgroundGradient className="max-h-[480px] overflow-hidden">
           {/* Encabezado con breadcrumb y botones de vista */}
           <div
-              className="bg-background-darkPurple flex w-full items-center justify-between p-[15px]"
+              className="bg-background-darkPurple flex w-full items-center justify-between p-[14px]"
               style={{
                 borderTopLeftRadius: "20px",
                 borderTopRightRadius: "20px",
@@ -73,11 +73,11 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
             </p>
             <div className="flex space-x-4">
               <IconLayoutGrid
-                  className={`cursor-pointer ${isGridView ? "text-primary-green" : ""}`}
+                  className={`cursor-pointer ${isGridView ? "text-primary-green" : "text-gray-500"}`}
                   onClick={() => setIsGridView(true)}
               />
               <IconListDetails
-                  className={`cursor-pointer ${!isGridView ? "text-primary-green" : ""}`}
+                  className={`cursor-pointer ${!isGridView ? "text-primary-green" : "text-gray-500"}`}
                   onClick={() => setIsGridView(false)}
               />
             </div>

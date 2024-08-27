@@ -27,7 +27,7 @@ const GridView: FC<GridViewProps> = ({ folderImages, folderNames, handleFolderCl
                         className="max-w-none cursor-pointer"
                         onClick={() => handleFolderClick(index)}
                     />
-                    <p className="text-center text-primary mt-2 font-bold">
+                    <p className="text-center text-white mt-2 font-bold">
                         {folderNames[index]}
                     </p>
                 </div>

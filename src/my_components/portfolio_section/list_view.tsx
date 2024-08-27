@@ -31,9 +31,9 @@ const ListView: FC<ListViewProps> = ({
                 >
                     <img src={src} alt={`Folder ${index + 1}`} className="w-16 h-16 max-w-none" />
                     <div className="flex justify-between w-full items-center">
-                        <p className="text-primary font-bold flex-grow">{folderNames[index]}</p>
-                        <p className="text-primary flex-shrink-0 mx-10">{itemCounts[index]} items </p>
-                        <p className="text-primary flex-shrink-0"> {itemDates[index]}</p>
+                        <p className="text-white font-bold flex-grow">{folderNames[index]}</p>
+                        <p className="text-white flex-shrink-0 mx-10">{itemCounts[index]} items </p>
+                        <p className="text-white flex-shrink-0"> {itemDates[index]}</p>
                     </div>
                 </div>
             ))}
