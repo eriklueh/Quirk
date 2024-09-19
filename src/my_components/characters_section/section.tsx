@@ -80,11 +80,12 @@ const CharactersSection = () => {
         />
         <div className="mt-8 flex flex-row gap-10">
           {cardsData.map((card, index) => (
-              <Card
-                  key={index}
-                  card={card}
-                  onClick={() => setSelectedCard(card)}
-              />
+              <div key={index} className="relative z-20">
+                <Card
+                    card={card}
+                    onClick={() => setSelectedCard(card)}
+                />
+              </div>
           ))}
         </div>
         {selectedCard && (
@@ -98,3 +99,4 @@ const CharactersSection = () => {
 };
 
 export default CharactersSection;
+

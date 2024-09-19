@@ -146,7 +146,7 @@ const ParallaxSection: React.FC = () => {
           ref={parallaxRef}
           className="relative h-screen overflow-hidden  flex items-center justify-center"
       >
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-2 pointer-events-none">
           <div
               style={{
                 height: '100px',
