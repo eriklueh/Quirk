@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useAchievements } from "~/my_components/achievement/achievement";
 
 interface Line {
   start: { x: number; y: number };
@@ -17,7 +18,11 @@ interface Sparkle {
   timestamp: number;
 }
 
-const CanvasDrawing = () => {
+interface CanvasDrawingProps {
+  onDraw: () => void;
+}
+
+const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hue, setHue] = useState(0);
@@ -25,6 +30,8 @@ const CanvasDrawing = () => {
   const linesRef = useRef<Line[]>([]);
   const sparklesRef = useRef<Sparkle[]>([]);
   const scrollYRef = useRef(0);
+  const hasDrawnRef = useRef(false);
+  const { unlockAchievement } = useAchievements();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -57,15 +64,13 @@ const CanvasDrawing = () => {
 
       const currentTime = Date.now();
 
-      // Filter lines and sparkles based on time
       linesRef.current = linesRef.current.filter(
-          (line) => currentTime - line.timestamp < 800,
+          (line) => currentTime - line.timestamp < 800
       );
       sparklesRef.current = sparklesRef.current.filter(
-          (sparkle) => currentTime - sparkle.timestamp < 1000,
+          (sparkle) => currentTime - sparkle.timestamp < 1000
       );
 
-      // Draw lines
       linesRef.current.forEach((line) => {
         const timePassed = currentTime - line.timestamp;
         const opacity = Math.max(0, 1 - timePassed / 5000);
@@ -76,7 +81,6 @@ const CanvasDrawing = () => {
         context.lineTo(line.end.x, line.end.y - scrollYRef.current);
         context.stroke();
 
-        // Draw beam
         context.shadowColor = `hsla(${line.hue}, 100%, 50%, ${opacity * 0.5})`;
         context.shadowBlur = 10;
         context.stroke();
@@ -84,7 +88,6 @@ const CanvasDrawing = () => {
         context.shadowBlur = 0;
       });
 
-      // Draw sparkles
       sparklesRef.current.forEach((sparkle) => {
         const timePassed = currentTime - sparkle.timestamp;
         const opacity = Math.max(0, 1 - timePassed / 1000);
@@ -92,7 +95,13 @@ const CanvasDrawing = () => {
 
         context.beginPath();
         context.fillStyle = `hsla(${sparkle.hue}, 100%, 50%, ${opacity})`;
-        context.arc(sparkle.x, sparkle.y - scrollYRef.current, size, 0, Math.PI * 2);
+        context.arc(
+            sparkle.x,
+            sparkle.y - scrollYRef.current,
+            size,
+            0,
+            Math.PI * 2
+        );
         context.fill();
       });
 
@@ -107,13 +116,19 @@ const CanvasDrawing = () => {
     };
   }, []);
 
-  const startDrawing = (e: MouseEvent | TouchEvent) => {
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     setIsDrawing(true);
     const point = getPointFromEvent(e);
     lastPointRef.current = point;
+
+    if (!hasDrawnRef.current) {
+      hasDrawnRef.current = true;
+      unlockAchievement('art_lover');
+      onDraw();
+    }
   };
 
-  const draw = (e: MouseEvent | TouchEvent) => {
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!isDrawing) return;
     const newPoint = getPointFromEvent(e);
     const newLine: Line = {
@@ -124,7 +139,6 @@ const CanvasDrawing = () => {
     };
     linesRef.current.push(newLine);
 
-    // Create new sparkles
     for (let i = 0; i < 5; i++) {
       const sparkle: Sparkle = {
         x: newPoint.x + (Math.random() - 0.5) * 30,
@@ -146,49 +160,37 @@ const CanvasDrawing = () => {
   };
 
   const getPointFromEvent = (
-      e: MouseEvent | TouchEvent,
+      e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
   ): { x: number; y: number } => {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return { x: 0, y: 0 };
 
-    if ("touches" in e && e.touches[0]) {
+    if ('touches' in e && e.touches[0]) {
       const touch = e.touches[0];
       return {
         x: touch.clientX - rect.left,
         y: touch.clientY - rect.top + scrollYRef.current,
       };
-    } else {
-      const mouseEvent = e as MouseEvent;
+    } else if ('clientX' in e) {
       return {
-        x: mouseEvent.clientX - rect.left,
-        y: mouseEvent.clientY - rect.top + scrollYRef.current,
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top + scrollYRef.current,
       };
     }
+    return { x: 0, y: 0 };
   };
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) =>
-      startDrawing(e.nativeEvent as MouseEvent | TouchEvent);
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) =>
-      draw(e.nativeEvent as MouseEvent | TouchEvent);
-  const handleMouseUp = () => stopDrawing();
-  const handleMouseOut = () => stopDrawing();
-  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) =>
-      startDrawing(e.nativeEvent as MouseEvent | TouchEvent);
-  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) =>
-      draw(e.nativeEvent as MouseEvent | TouchEvent);
-  const handleTouchEnd = () => stopDrawing();
 
   return (
       <canvas
           ref={canvasRef}
-          className="pointer-events-auto fixed inset-0 z-[1] h-full w-full"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseOut={handleMouseOut}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          className="z-5 pointer-events-auto fixed inset-0 h-full w-full"
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={stopDrawing}
+          onMouseOut={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
       />
   );
 };

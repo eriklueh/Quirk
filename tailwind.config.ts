@@ -18,7 +18,7 @@ export default {
           magenta: "#e500ee", // MAGENTA
           cyan: "#0af3ff", // CIAN
           darkViolet: "#2f195e", // VIOLET OSCURO
-          blackViolet: "#0f1020", // VIOLETA NEGRO
+          blackViolet: "#0f1020",
         },
         secondary: {
           brightViolet: "#9600f1", // VIOLETA BRILLANTE

@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import { Urbanist } from "next/font/google";
 import { type Metadata } from "next";
 import React from "react";
+import {AchievementProvider} from "~/my_components/achievement/achievement";
 
 export const metadata: Metadata = {
     title: "Quirk",
@@ -31,7 +32,11 @@ const urbanist = Urbanist({
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en" className={`${urbanist.variable} cursor-fancy`}>
-        <body>{children}</body>
+        <body>
+        <AchievementProvider>
+            {children}
+        </AchievementProvider>
+        </body>
         </html>
     );
 }
