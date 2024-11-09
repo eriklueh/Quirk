@@ -10,14 +10,6 @@ interface Line {
   timestamp: number;
 }
 
-interface Sparkle {
-  x: number;
-  y: number;
-  size: number;
-  hue: number;
-  timestamp: number;
-}
-
 interface CanvasDrawingProps {
   onDraw: () => void;
 }
@@ -28,7 +20,6 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
   const [hue, setHue] = useState(0);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
   const linesRef = useRef<Line[]>([]);
-  const sparklesRef = useRef<Sparkle[]>([]);
   const scrollYRef = useRef(0);
   const hasDrawnRef = useRef(false);
   const { unlockAchievement } = useAchievements();
@@ -67,9 +58,6 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
       linesRef.current = linesRef.current.filter(
           (line) => currentTime - line.timestamp < 800
       );
-      sparklesRef.current = sparklesRef.current.filter(
-          (sparkle) => currentTime - sparkle.timestamp < 1000
-      );
 
       linesRef.current.forEach((line) => {
         const timePassed = currentTime - line.timestamp;
@@ -86,23 +74,6 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
         context.stroke();
         context.shadowColor = "transparent";
         context.shadowBlur = 0;
-      });
-
-      sparklesRef.current.forEach((sparkle) => {
-        const timePassed = currentTime - sparkle.timestamp;
-        const opacity = Math.max(0, 1 - timePassed / 1000);
-        const size = sparkle.size * (1 - timePassed / 1000);
-
-        context.beginPath();
-        context.fillStyle = `hsla(${sparkle.hue}, 100%, 50%, ${opacity})`;
-        context.arc(
-            sparkle.x,
-            sparkle.y - scrollYRef.current,
-            size,
-            0,
-            Math.PI * 2
-        );
-        context.fill();
       });
 
       requestAnimationFrame(render);
@@ -138,17 +109,6 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
       timestamp: Date.now(),
     };
     linesRef.current.push(newLine);
-
-    for (let i = 0; i < 5; i++) {
-      const sparkle: Sparkle = {
-        x: newPoint.x + (Math.random() - 0.5) * 30,
-        y: newPoint.y + (Math.random() - 0.5) * 30,
-        size: Math.random() * 4 + 2,
-        hue: (hue + Math.random() * 60 - 30 + 360) % 360,
-        timestamp: Date.now(),
-      };
-      sparklesRef.current.push(sparkle);
-    }
 
     setHue((prevHue) => (prevHue + 1) % 360);
     lastPointRef.current = newPoint;
