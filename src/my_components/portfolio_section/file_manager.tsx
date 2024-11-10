@@ -1,9 +1,9 @@
 import { AnimationControls, motion } from "framer-motion";
 import { FC, useState } from "react";
-import { BackgroundGradient } from "~/components/ui/background-gradient";
 import { IconLayoutGrid, IconListDetails } from "@tabler/icons-react";
 import GridView from "~/my_components/portfolio_section/grid_view";
 import ListView from "~/my_components/portfolio_section/list_view";
+import GradientCard from "~/components/ui/gradient-card";
 
 interface FileManagerProps {
   controls: AnimationControls;
@@ -24,7 +24,7 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
 
   const folderImages = Array.from(
       { length: 7 },
-      (_, i) => `/assets/folders/Recurso ${i + 1}.svg`,
+      (_, i) => `/assets/folders/Recurso ${i + 1}.svg`
   );
 
   const folderNames = [
@@ -52,6 +52,24 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
     setSelectedFolder(index);
   };
 
+  const headerContent = (
+      <>
+        <p className="text-left text-2xl font-bold text-primary-green">
+          ./Quirk {selectedFolder !== null ? `/ ${folderNames[selectedFolder]}` : ""}
+        </p>
+        <div className="flex space-x-4">
+          <IconLayoutGrid
+              className={`cursor-pointer ${isGridView ? "text-primary-green" : "text-gray-500"}`}
+              onClick={() => setIsGridView(true)}
+          />
+          <IconListDetails
+              className={`cursor-pointer ${!isGridView ? "text-primary-green" : "text-gray-500"}`}
+              onClick={() => setIsGridView(false)}
+          />
+        </div>
+      </>
+  );
+
   return (
       <motion.div
           initial="hidden"
@@ -59,31 +77,10 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
           variants={rectangleVariants}
           className="w-full max-w-2xl"
       >
-        <BackgroundGradient className="max-h-[480px] overflow-hidden">
-          {/* Encabezado con breadcrumb y botones de vista */}
-          <div
-              className="bg-background-darkPurple flex w-full items-center justify-between p-[14px]"
-              style={{
-                borderTopLeftRadius: "20px",
-                borderTopRightRadius: "20px",
-              }}
-          >
-            <p className="text-left text-2xl font-bold text-primary-green">
-              ./Quirk {selectedFolder !== null ? `/ ${folderNames[selectedFolder]}` : ""}
-            </p>
-            <div className="flex space-x-4">
-              <IconLayoutGrid
-                  className={`cursor-pointer ${isGridView ? "text-primary-green" : "text-gray-500"}`}
-                  onClick={() => setIsGridView(true)}
-              />
-              <IconListDetails
-                  className={`cursor-pointer ${!isGridView ? "text-primary-green" : "text-gray-500"}`}
-                  onClick={() => setIsGridView(false)}
-              />
-            </div>
-          </div>
-
-          {/* Vistas Grid y List */}
+        <GradientCard
+            className="max-h-[480px]"
+            headerContent={headerContent}
+        >
           {isGridView ? (
               <GridView
                   folderImages={folderImages}
@@ -99,7 +96,7 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
                   handleFolderClick={handleFolderClick}
               />
           )}
-        </BackgroundGradient>
+        </GradientCard>
       </motion.div>
   );
 };

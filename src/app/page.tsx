@@ -9,6 +9,8 @@ import PortfolioSection from "~/my_components/portfolio_section/section";
 import CharactersSection from "~/my_components/characters_section/section";
 import CanvasDrawing from "~/my_components/canvas_drawing";
 import { useAchievements } from "~/my_components/achievement/achievement";
+import AboutSection from "~/my_components/about-section";
+import ServerSection from "~/my_components/server-section";
 
 export default function HomePage() {
   const typewriterRef = useRef(null);
@@ -32,17 +34,22 @@ export default function HomePage() {
     };
 
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'w') {
-        window.scrollBy(0, -100);
-        if (!hasUsedKeyboardNav.current) {
-          hasUsedKeyboardNav.current = true;
-          unlockAchievement('hidden_gamer');
+      // Check if the active element is an input or textarea
+      const activeElement = document.activeElement;
+      const isInputActive = activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement;
+
+      // Only process 'w' and 's' keys for navigation when not typing in an input or textarea
+      if (!isInputActive && (e.key.toLowerCase() === "w" || e.key.toLowerCase() === "s")) {
+        e.preventDefault(); // Prevent default scrolling behavior
+        if (e.key.toLowerCase() === "w") {
+          window.scrollBy(0, -100);
+        } else if (e.key.toLowerCase() === "s") {
+          window.scrollBy(0, 100);
         }
-      } else if (e.key.toLowerCase() === 's') {
-        window.scrollBy(0, 100);
+
         if (!hasUsedKeyboardNav.current) {
           hasUsedKeyboardNav.current = true;
-          unlockAchievement('hidden_gamer');
+          unlockAchievement("hidden_gamer");
         }
       }
     };
@@ -66,28 +73,34 @@ export default function HomePage() {
   };
 
   return (
-      <main className="flex min-h-screen flex-col bg-background-black">
-        <CanvasDrawing onDraw={handleDraw} />
-        <div className="flex flex-grow items-center justify-center">
-          <div
-              id="typewriter"
-              className="flex h-screen items-center justify-center"
-              ref={typewriterRef}
-          >
-            <TypeWriterInitialText />
-          </div>
+    <main className="flex min-h-screen flex-col bg-background-black">
+      <CanvasDrawing onDraw={handleDraw} />
+      <div className="flex flex-grow items-center justify-center">
+        <div
+          id="typewriter"
+          className="flex h-screen items-center justify-center"
+          ref={typewriterRef}
+        >
+          <TypeWriterInitialText />
+        </div>
 
-          {isMobile ? <MobileMenu /> : showMenu && <DesktopMenu />}
-        </div>
-        <div id="parallax">
-          <ParallaxSection />
-        </div>
-        <div id="portfolio">
-          <PortfolioSection />
-        </div>
-        <div id="characters">
-          <CharactersSection />
-        </div>
-      </main>
+        {isMobile ? <MobileMenu /> : showMenu && <DesktopMenu />}
+      </div>
+      <div id="parallax">
+        <ParallaxSection />
+      </div>
+      <div id="portfolio">
+        <PortfolioSection />
+      </div>
+      <div id="characters">
+        <CharactersSection />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="server">
+        <ServerSection />
+      </div>
+    </main>
   );
 }
