@@ -69,6 +69,7 @@ export default function ServerSection() {
     offset: ["start end", "end start"],
   });
 
+
   const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [100, 0]));
   const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [-100, 0]));
 
