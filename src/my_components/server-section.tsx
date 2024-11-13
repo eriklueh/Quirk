@@ -246,6 +246,8 @@ export default function ServerSection() {
               <motion.a
                 key={icon.name}
                 href={icon.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative h-[70px] w-[70px]"
                 onHoverStart={() => setHoveredIcon(icon.name)}
                 onHoverEnd={() => setHoveredIcon(null)}
