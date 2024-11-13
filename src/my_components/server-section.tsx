@@ -289,83 +289,92 @@ export default function ServerSection() {
         </div>
       </motion.div>
 
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="bg-black border-primary-magenta p-6">
-            <DialogHeader>
-              <DialogTitle className="font-mono text-2xl text-primary-green mb-4">
-                {"> .Quirk > Server > Formulario"}
-              </DialogTitle>
-            </DialogHeader>
-            <form onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-6">
-              <div className="space-y-2">
-                <h2 className="text-xl text-white font-bold">
-                  ¿Querés que trabajemos juntos?
-                </h2>
-                <p className="text-primary-cyan">
-                  Completá este formulario y nos pondremos en contacto contigo.
-                </p>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="to-email" className="block text-sm font-medium text-primary-green mb-1">Para:</label>
-                  <input
-                      type="text"
-                      id="to-email"
-                      value={CONTACT_EMAIL}
-                      readOnly
-                      className="w-full bg-background-black text-gray-400 border-primary-magenta rounded-md py-2 px-3 text-sm"
-                  />
-                </div>
-                <Input
-                    name="name"
-                    placeholder="Nombre y Apellido*"
-                    required
-                    className="bg-background-black text-white border-primary-magenta"
-                    onChange={handleInputChange}
-                    disabled={isLoading}
-                />
-                <Input
-                    name="email"
-                    type="email"
-                    placeholder="E-mail*"
-                    required
-                    className="bg-background-black text-white border-primary-magenta"
-                    onChange={handleInputChange}
-                    disabled={isLoading}
-                />
-                <Textarea
-                    name="message"
-                    placeholder="¡Dejános tu mensaje!"
-                    required
-                    className="min-h-[150px] bg-background-black text-white border-primary-magenta"
-                    onChange={handleInputChange}
-                    disabled={isLoading}
-                />
-              </div>
-              <div className="flex justify-end">
-                <motion.div
-                    animate={submitButtonControls}
-                    className="p-[2px] rounded-lg overflow-hidden"
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="border-primary-magenta bg-black p-6">
+          <DialogHeader>
+            <DialogTitle className="mb-4 font-mono text-2xl text-primary-green">
+              {"> .Quirk > Server > Formulario"}
+            </DialogTitle>
+          </DialogHeader>
+          <form
+            onSubmit={handleSubmit}
+            onChange={handleFormChange}
+            className="space-y-6"
+          >
+            <div className="space-y-2">
+              <h2 className="text-xl font-bold text-white">
+                ¿Querés que trabajemos juntos?
+              </h2>
+              <p className="text-primary-cyan">
+                Completá este formulario y nos pondremos en contacto contigo.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label
+                  htmlFor="to-email"
+                  className="mb-1 block text-sm font-medium text-primary-green"
                 >
-                  <button
-                      type="submit"
-                      disabled={!formValid || isLoading}
-                      className="rounded-lg bg-black px-6 py-2 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                  >
-                    {isLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Enviando...
-                        </>
-                    ) : (
-                        "Enviar"
-                    )}
-                  </button>
-                </motion.div>
+                  Para:
+                </label>
+                <input
+                  type="text"
+                  id="to-email"
+                  value={CONTACT_EMAIL}
+                  readOnly
+                  className="w-full rounded-md border-primary-magenta bg-background-black px-3 py-2 text-sm text-gray-400"
+                />
               </div>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </section>
+              <Input
+                name="name"
+                placeholder="Nombre y Apellido*"
+                required
+                className="border-primary-magenta bg-background-black text-white"
+                onChange={handleInputChange}
+                disabled={isLoading}
+              />
+              <Input
+                name="email"
+                type="email"
+                placeholder="E-mail*"
+                required
+                className="border-primary-magenta bg-background-black text-white"
+                onChange={handleInputChange}
+                disabled={isLoading}
+              />
+              <Textarea
+                name="message"
+                placeholder="¡Dejános tu mensaje!"
+                required
+                className="min-h-[150px] border-primary-magenta bg-background-black text-white"
+                onChange={handleInputChange}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="flex justify-end">
+              <motion.div
+                animate={submitButtonControls}
+                className="overflow-hidden rounded-lg p-[2px]"
+              >
+                <button
+                  type="submit"
+                  disabled={!formValid || isLoading}
+                  className="flex items-center justify-center rounded-lg bg-black px-6 py-2 text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Enviar"
+                  )}
+                </button>
+              </motion.div>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </section>
   );
 }
