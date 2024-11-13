@@ -14,12 +14,47 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/hooks/use-toast";
 
+type SocialIcon = {
+    name: string;
+    normalSrc: string;
+    hoverSrc: string;
+    link: string;
+};
+
+const socialIcons: SocialIcon[] = [
+    {
+        name: 'ArtStation',
+        normalSrc: '/assets/server/art_station.svg',
+        hoverSrc: '/assets/server/art_station_hover.svg',
+        link: 'https://www.artstation.com/punto_quirk'
+    },
+    {
+        name: 'Instagram',
+        normalSrc: '/assets/server/instagram.svg',
+        hoverSrc: '/assets/server/instagram_hover.svg',
+        link: 'https://www.instagram.com/punto.quirk?igsh=Mjl4bmIyZDR1NnBu'
+    },
+    {
+        name: 'Discord',
+        normalSrc: '/assets/server/discord.svg',
+        hoverSrc: '/assets/server/discord_hover.svg',
+        link: 'https://discord.com/invite/BVtTyKhtzp'
+    },
+    {
+        name: 'TikTok',
+        normalSrc: '/assets/server/tik_tok.svg',
+        hoverSrc: '/assets/server/tik_tok_hover.svg',
+        link: 'https://www.tiktok.com/@punto.quirk?_t=8m1UojDMrsU&_r=1'
+    }
+];
+
 export default function ServerSection() {
     const ref = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { toast } = useToast();
     const buttonControls = useAnimation();
+    const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -161,42 +196,33 @@ export default function ServerSection() {
                             borderBottomRightRadius: "20px",
                         }}
                     >
-                        <a href="#" className="transition-transform hover:scale-110">
-                            <Image
-                                src="/placeholder.svg?height=50&width=50"
-                                alt="Artstation"
-                                width={50}
-                                height={50}
-                                className="opacity-80 hover:opacity-100"
-                            />
-                        </a>
-                        <a href="#" className="transition-transform hover:scale-110">
-                            <Image
-                                src="/placeholder.svg?height=50&width=50"
-                                alt="Instagram"
-                                width={50}
-                                height={50}
-                                className="opacity-80 hover:opacity-100"
-                            />
-                        </a>
-                        <a href="#" className="transition-transform hover:scale-110">
-                            <Image
-                                src="/placeholder.svg?height=50&width=50"
-                                alt="Discord"
-                                width={50}
-                                height={50}
-                                className="opacity-80 hover:opacity-100"
-                            />
-                        </a>
-                        <a href="#" className="transition-transform hover:scale-110">
-                            <Image
-                                src="/placeholder.svg?height=50&width=50"
-                                alt="TikTok"
-                                width={50}
-                                height={50}
-                                className="opacity-80 hover:opacity-100"
-                            />
-                        </a>
+                        {socialIcons.map((icon) => (
+                            <motion.a
+                                key={icon.name}
+                                href={icon.link}
+                                className="relative w-[70px] h-[70px]"
+                                onHoverStart={() => setHoveredIcon(icon.name)}
+                                onHoverEnd={() => setHoveredIcon(null)}
+                                whileHover={{ scale: 1.3 }}
+                            >
+                                <Image
+                                    src={icon.normalSrc}
+                                    alt={icon.name}
+                                    layout="fill"
+                                    className={`transition-opacity duration-300 ${
+                                        hoveredIcon === icon.name ? 'opacity-0' : 'opacity-80'
+                                    }`}
+                                />
+                                <Image
+                                    src={icon.hoverSrc}
+                                    alt={`${icon.name} Hover`}
+                                    layout="fill"
+                                    className={`transition-opacity duration-300 ${
+                                        hoveredIcon === icon.name ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                />
+                            </motion.a>
+                        ))}
                     </div>
                 </GradientCard>
 
