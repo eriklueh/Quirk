@@ -14,7 +14,7 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/hooks/use-toast";
 import { useAchievements } from "~/my_components/achievement/achievement";
-import { Loader2 } from 'lucide-react'; // Import the Loader2 icon from lucide-react
+import { Loader2 } from 'lucide-react';
 
 type SocialIcon = {
   name: string;
@@ -292,87 +292,82 @@ export default function ServerSection() {
       </motion.div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="border-primary-magenta bg-black p-6">
+        <DialogContent className="border-gray-700 bg-gray-100 p-8 shadow-lg">
           <DialogHeader>
-            <DialogTitle className="mb-4 font-mono text-2xl text-primary-green">
-              {"> .Quirk > Server > Formulario"}
+            <DialogTitle className="mb-6 text-3xl font-bold text-gray-800">
+              Contact Us
             </DialogTitle>
           </DialogHeader>
           <form
-            onSubmit={handleSubmit}
-            onChange={handleFormChange}
-            className="space-y-6"
+              onSubmit={handleSubmit}
+              onChange={handleFormChange}
+              className="space-y-6"
           >
             <div className="space-y-2">
-              <h2 className="text-xl font-bold text-white">
-                ¿Querés que trabajemos juntos?
+              <h2 className="text-2xl font-semibold text-gray-700">
+                Let's Work Together
               </h2>
-              <p className="text-primary-cyan">
-                Completá este formulario y nos pondremos en contacto contigo.
+              <p className="text-gray-600">
+                Please fill out this form and we'll get back to you shortly.
               </p>
             </div>
             <div className="space-y-4">
               <div>
                 <label
-                  htmlFor="to-email"
-                  className="mb-1 block text-sm font-medium text-primary-green"
+                    htmlFor="to-email"
+                    className="mb-1 block text-sm font-medium text-gray-700"
                 >
-                  Para:
+                  To:
                 </label>
                 <input
-                  type="text"
-                  id="to-email"
-                  value={CONTACT_EMAIL}
-                  readOnly
-                  className="w-full rounded-md border-primary-magenta bg-background-black px-3 py-2 text-sm text-gray-400"
+                    type="text"
+                    id="to-email"
+                    value={CONTACT_EMAIL}
+                    readOnly
+                    className="w-full rounded-md border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-500"
                 />
               </div>
               <Input
-                name="name"
-                placeholder="Nombre y Apellido*"
-                required
-                className="border-primary-magenta bg-background-black text-white"
-                onChange={handleInputChange}
-                disabled={isLoading}
+                  name="name"
+                  placeholder="Full Name*"
+                  required
+                  className="border-gray-300 bg-white text-gray-800"
+                  onChange={handleInputChange}
+                  disabled={isLoading}
               />
               <Input
-                name="email"
-                type="email"
-                placeholder="E-mail*"
-                required
-                className="border-primary-magenta bg-background-black text-white"
-                onChange={handleInputChange}
-                disabled={isLoading}
+                  name="email"
+                  type="email"
+                  placeholder="Email Address*"
+                  required
+                  className="border-gray-300 bg-white text-gray-800"
+                  onChange={handleInputChange}
+                  disabled={isLoading}
               />
               <Textarea
-                name="message"
-                placeholder="¡Dejános tu mensaje!"
-                required
-                className="min-h-[150px] border-primary-magenta bg-background-black text-white"
-                onChange={handleInputChange}
-                disabled={isLoading}
+                  name="message"
+                  placeholder="Your Message*"
+                  required
+                  className="min-h-[150px] border-gray-300 bg-white text-gray-800"
+                  onChange={handleInputChange}
+                  disabled={isLoading}
               />
             </div>
             <div className="flex justify-end">
-              <motion.div
-                animate={submitButtonControls}
-                className="overflow-hidden rounded-lg p-[2px]"
-              >
-                <button
+              <button
                   type="submit"
                   disabled={!formValid || isLoading}
-                  className="flex items-center justify-center rounded-lg bg-black px-6 py-2 text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {isLoading ? (
+                  className="flex items-center justify-center rounded-lg bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Enviando...
+                      Sending...
                     </>
-                  ) : (
-                    "Enviar"
-                  )}
-                </button>
-              </motion.div>
+                ) : (
+                    "Send Message"
+                )}
+              </button>
             </div>
           </form>
         </DialogContent>
