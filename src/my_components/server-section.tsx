@@ -305,9 +305,11 @@ export default function ServerSection() {
           >
             <div className="space-y-2">
               <h2 className="text-2xl font-semibold text-gray-700">
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Let's Work Together
               </h2>
               <p className="text-gray-600">
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Please fill out this form and we'll get back to you shortly.
               </p>
             </div>
