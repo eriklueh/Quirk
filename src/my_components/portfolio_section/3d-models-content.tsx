@@ -16,14 +16,77 @@ interface Model3D {
 const models: Model3D[] = [
     {
         id: "1",
-        title: "Killjoy Turret - 3D Model",
-        thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        embedUrl: "https://sketchfab.com/models/853af3ac67cf4119b2470fd6433aa9b4/embed",
-        author: "draw_your_champ",
-        authorUrl: "https://sketchfab.com/draw_your_champ",
+        title: "Heian Era Minka .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Minka-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/8f6c197c1c7a4e2a83b6eee5fe07cd89/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
     },
-    // Añade más modelos 3D aquí
-]
+    {
+        id: "2",
+        title: "Stylized Robot .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robot-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/88d903bb272646a1991da50eefbc5282/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "3",
+        title: "Stylized Telescope .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Telescopio-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/83a869df5f084f399cb9050018222a59/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "4",
+        title: "Stylized Neko Computer .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/NekoPC-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/ddba19e6486d456aa31783b6bd9bcbe1/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "5",
+        title: "Stylized Robo-Bear .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robobear-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/fe0d8c07a7aa4332bb67512eb7efaa6d/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "6",
+        title: "Stylized Chip Boy .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Chipboy-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/e5442d3bf20e49c79d982eb6c80235fc/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "7",
+        title: "Piano Vertical .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Piano-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/3935b47b9d8746b090b92f19e9de5d5d/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "8",
+        title: "Guitarra Les Paul Classic .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/LesPaul-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/36d4748f93d2437992e8bdf63b132f78/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "9",
+        title: "Stylized Cyber PC .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/PC_Antique-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/b6567abcd75c429cb365c92b58ae57f1/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+];
 
 interface Models3DContentProps {
     onItemClick: (itemName: string) => void
@@ -81,7 +144,7 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="grid grid-cols-2 gap-4 md:grid-cols-3"
+                        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
                     >
                         {models.map((model) => (
                             <motion.div
@@ -107,3 +170,4 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
         </div>
     )
 }
+

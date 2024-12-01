@@ -9,6 +9,10 @@ import GradientCard from "~/components/ui/gradient-card"
 import ContentDialog from "~/my_components/portfolio_section/content-dialog"
 import GamesContent from "~/my_components/portfolio_section/games/game-content"
 import Models3DContent from "~/my_components/portfolio_section/3d-models-content"
+import MotionContent from "~/my_components/portfolio_section/motion-content"
+import TreatmentContent from "~/my_components/portfolio_section/treatment-content"
+import IllustrationContent from "~/my_components/portfolio_section/illustration-content"
+import VFXContent from "~/my_components/portfolio_section/vfx-content"
 
 interface FileManagerProps {
   controls: AnimationControls
@@ -109,13 +113,13 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
       case "3D":
         return <Models3DContent onItemClick={handleItemClick} selectedModel={selectedItem} onBack={handleBack} />
       case "Motion":
-        return <div>Contenido Motion (por implementar)</div>
+        return <MotionContent onItemClick={handleItemClick} selectedVideo={selectedItem} onBack={handleBack} />
       case "Ilustración":
-        return <div>Contenido Ilustración (por implementar)</div>
+        return <IllustrationContent onItemClick={handleItemClick} selectedIllustration={selectedItem} onBack={handleBack} />
       case "VFX":
-        return <div>Contenido VFX (por implementar)</div>
+        return <VFXContent onItemClick={handleItemClick} selectedVFX={selectedItem} onBack={handleBack} />
       case "Tratamiento":
-        return <div>Contenido Tratamiento (por implementar)</div>
+        return <TreatmentContent onItemClick={handleItemClick} selectedTreatment={selectedItem} onBack={handleBack} />
       case "Animación":
         return <div>Contenido Animación (por implementar)</div>
       default:
@@ -166,3 +170,4 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
 }
 
 export default FileManager
+

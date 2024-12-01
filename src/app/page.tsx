@@ -2,8 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import TypeWriterInitialText from "~/my_components/type_writed_initial_text";
-import { DesktopMenu } from "~/my_components/navigation/desktop_menu";
-import { MobileMenu } from "~/my_components/navigation/mobile_menu";
 import ParallaxSection from "~/my_components/paralax_section";
 import PortfolioSection from "~/my_components/portfolio_section/section";
 import CharactersSection from "~/my_components/characters_section/section";
@@ -14,32 +12,23 @@ import ServerSection from "~/my_components/server-section";
 
 export default function HomePage() {
   const typewriterRef = useRef(null);
-  const [showMenu, setShowMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const { unlockAchievement } = useAchievements();
   const hasDrawn = useRef(false);
   const hasUsedKeyboardNav = useRef(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
-
     const handleKeyPress = (e: KeyboardEvent) => {
       // Check if the active element is an input or textarea
       const activeElement = document.activeElement;
-      const isInputActive = activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement;
+      const isInputActive =
+        activeElement instanceof HTMLInputElement ||
+        activeElement instanceof HTMLTextAreaElement;
 
       // Only process 'w' and 's' keys for navigation when not typing in an input or textarea
-      if (!isInputActive && (e.key.toLowerCase() === "w" || e.key.toLowerCase() === "s")) {
+      if (
+        !isInputActive &&
+        (e.key.toLowerCase() === "w" || e.key.toLowerCase() === "s")
+      ) {
         e.preventDefault(); // Prevent default scrolling behavior
         if (e.key.toLowerCase() === "w") {
           window.scrollBy(0, -100);
@@ -54,14 +43,9 @@ export default function HomePage() {
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
     window.addEventListener("keydown", handleKeyPress);
-    handleResize();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("keydown", handleKeyPress);
     };
   }, [unlockAchievement]);
@@ -83,8 +67,6 @@ export default function HomePage() {
         >
           <TypeWriterInitialText />
         </div>
-
-        {isMobile ? <MobileMenu /> : showMenu && <DesktopMenu />}
       </div>
       <div id="parallax">
         <ParallaxSection />
