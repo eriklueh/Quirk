@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { IconArrowLeft } from "@tabler/icons-react"
-import { Heart } from "lucide-react"
+import { Heart } from 'lucide-react'
 import {
     Tooltip,
     TooltipContent,
@@ -18,7 +18,6 @@ interface IllustrationItem {
 }
 
 const illustrationItems: IllustrationItem[] = [
-
     {
         id: "1",
         title: "NPC-Q .Quirk ˎˊ˗",
@@ -63,7 +62,7 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
     const easterEggTimerRef = useRef<NodeJS.Timeout | null>(null)
 
     const handleMouseEnter = (itemId: string) => {
-        if (itemId === "6") { // NPC-K.gif
+        if (itemId === "5") { // NPC-K.gif
             easterEggTimerRef.current = setTimeout(() => {
                 setShowEasterEgg(true)
             }, 24000) // 24 seconds
@@ -124,7 +123,7 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
                     >
                         {illustrationItems.map((item) => (
                             <TooltipProvider key={item.id}>
-                                <Tooltip open={item.id === "6" && showEasterEgg}>
+                                <Tooltip open={item.id === "5" && showEasterEgg}>
                                     <TooltipTrigger asChild>
                                         <motion.div
                                             whileHover={{ scale: 1.05 }}
@@ -146,7 +145,7 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
                                             </p>
                                         </motion.div>
                                     </TooltipTrigger>
-                                    <TooltipContent side="top" className="bg-red-500 text-white border-none p-2">
+                                    <TooltipContent side="top" align="center" className="bg-red-500 text-white border-none p-2">
                                         <Heart className="w-6 h-6 text-white" />
                                     </TooltipContent>
                                 </Tooltip>
@@ -158,3 +157,4 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
         </div>
     )
 }
+

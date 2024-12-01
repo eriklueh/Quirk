@@ -14,23 +14,10 @@ interface Game {
 const games: Game[] = [
     {
         id: "1",
-        title: "Tori-Torii",
+        title: " Tori-Torii ",
         thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        gameUrl: "https://puntoquirk.itch.io/tori-torii"
-    },
-    {
-        id: "2",
-        title: "Carrera Veloz",
-        thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        gameUrl: "https://games.construct.net/174/latest"
-    },
-    {
-        id: "3",
-        title: "Puzzle Mágico",
-        thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        gameUrl: "https://games.construct.net/174/latest"
-    },
-    // Añade más juegos según sea necesario
+        gameUrl: "https://itch.io/embed-upload/12065538?color=2a2a2a"
+    }
 ]
 
 interface GamesContentProps {
