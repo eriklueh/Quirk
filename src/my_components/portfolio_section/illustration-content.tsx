@@ -1,7 +1,15 @@
 "use client"
 
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { IconArrowLeft } from "@tabler/icons-react"
+import { Heart } from "lucide-react"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "~/components/ui/tooltip"
 
 interface IllustrationItem {
     id: string
@@ -10,12 +18,38 @@ interface IllustrationItem {
 }
 
 const illustrationItems: IllustrationItem[] = [
+
     {
         id: "1",
+        title: "NPC-Q .Quirk ˎˊ˗",
+        imageUrl: "/assets/portfolio/Ilustración/NPC-Q.gif",
+    },
+    {
+        id: "2",
+        title: "NPC-U .Quirk ˎˊ˗",
+        imageUrl: "/assets/portfolio/Ilustración/NPC-U.gif",
+    },
+    {
+        id: "3",
+        title: "NPC-I .Quirk ˎˊ˗",
+        imageUrl: "/assets/portfolio/Ilustración/NPC-I.gif",
+    },
+    {
+        id: "4",
+        title: "NPC-R .Quirk ˎˊ˗",
+        imageUrl: "/assets/portfolio/Ilustración/NPC-R.gif",
+    },
+    {
+        id: "5",
+        title: "NPC-K .Quirk ˎˊ˗",
+        imageUrl: "/assets/portfolio/Ilustración/NPC-K.gif",
+    },
+    {
+        id: "6",
         title: "Así se ve un Quirk ˎˊ˗",
         imageUrl: "/assets/portfolio/Ilustración/speedpaint.jpg",
     },
-]
+];
 
 interface IllustrationContentProps {
     onItemClick: (itemName: string) => void
@@ -25,6 +59,32 @@ interface IllustrationContentProps {
 
 export default function IllustrationContent({ onItemClick, selectedIllustration, onBack }: IllustrationContentProps) {
     const selectedItem = illustrationItems.find(item => item.title === selectedIllustration)
+    const [showEasterEgg, setShowEasterEgg] = useState(false)
+    const easterEggTimerRef = useRef<NodeJS.Timeout | null>(null)
+
+    const handleMouseEnter = (itemId: string) => {
+        if (itemId === "6") { // NPC-K.gif
+            easterEggTimerRef.current = setTimeout(() => {
+                setShowEasterEgg(true)
+            }, 24000) // 24 seconds
+        }
+    }
+
+    const handleMouseLeave = () => {
+        if (easterEggTimerRef.current) {
+            clearTimeout(easterEggTimerRef.current)
+            easterEggTimerRef.current = null
+        }
+        setShowEasterEgg(false)
+    }
+
+    useEffect(() => {
+        return () => {
+            if (easterEggTimerRef.current) {
+                clearTimeout(easterEggTimerRef.current)
+            }
+        }
+    }, [])
 
     return (
         <div className="w-full">
@@ -60,27 +120,37 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                        className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
                     >
                         {illustrationItems.map((item) => (
-                            <motion.div
-                                key={item.id}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="cursor-pointer"
-                                onClick={() => onItemClick(item.title)}
-                            >
-                                <div className="relative aspect-square overflow-hidden rounded-lg bg-background-darkPurple">
-                                    <img
-                                        src={item.imageUrl}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                                <p className="mt-2 text-center font-medium text-primary-green">
-                                    {item.title}
-                                </p>
-                            </motion.div>
+                            <TooltipProvider key={item.id}>
+                                <Tooltip open={item.id === "6" && showEasterEgg}>
+                                    <TooltipTrigger asChild>
+                                        <motion.div
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="cursor-pointer relative"
+                                            onClick={() => onItemClick(item.title)}
+                                            onMouseEnter={() => handleMouseEnter(item.id)}
+                                            onMouseLeave={handleMouseLeave}
+                                        >
+                                            <div className="relative aspect-square overflow-hidden rounded-lg bg-background-darkPurple w-full max-w-[150px] mx-auto">
+                                                <img
+                                                    src={item.imageUrl}
+                                                    alt={item.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <p className="mt-2 text-center text-sm font-medium text-primary-green">
+                                                {item.title}
+                                            </p>
+                                        </motion.div>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top" className="bg-red-500 text-white border-none p-2">
+                                        <Heart className="w-6 h-6 text-white" />
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         ))}
                     </motion.div>
                 )}
@@ -88,4 +158,3 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
         </div>
     )
 }
-

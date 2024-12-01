@@ -14,9 +14,9 @@ interface Game {
 const games: Game[] = [
     {
         id: "1",
-        title: "Aventura Espacial",
+        title: "Tori-Torii",
         thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        gameUrl: "https://games.construct.net/174/latest"
+        gameUrl: "https://puntoquirk.itch.io/tori-torii"
     },
     {
         id: "2",
