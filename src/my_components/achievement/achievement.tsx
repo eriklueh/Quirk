@@ -21,55 +21,55 @@ export const achievements: Achievement[] = [
     id: "art_lover",
     title: "Me gusta el arte",
     description: "Dibujaste en los costados",
-    image: "/achievements/art_lover.png",
+    image: "assets/achievement/ME GUSTA EL ARTE@2x.png",
   },
   {
     id: "form_master",
     title: "Fino señores",
     description: "Enviaste una solicitud",
-    image: "/achievements/form_master.png",
+    image: "assets/achievement/FINO SEÑORES@2x.png",
   },
   {
     id: "attention_deficit",
     title: "Deficit de atención",
     description: "10 minutos en el sitio",
-    image: "/achievements/attention_deficit.png",
+    image: "assets/achievement/DEFICIT DE ATENCION@2x.png",
   },
   {
     id: "quirk_fan",
     title: "Quirk Fan",
     description: "Viste todos los perfiles",
-    image: "/achievements/quirk_fan.png",
+    image: "assets/achievement/QUIRK FAN@2x.png",
   },
   {
     id: "portfolio_explorer",
     title: "La Pala",
     description: "Viste todo el portfolio",
-    image: "/achievements/portfolio_explorer.png",
+    image: "assets/achievement/LA PALA D-@2x.png",
   },
   {
     id: "social_butterfly",
     title: "Oh Stop it You",
     description: "Tocaste las 4 redes sociales",
-    image: "/achievements/social_butterfly.png",
+    image: "assets/achievement/OH STOP IT YOU!@2x.png",
   },
   {
     id: "dog_finder",
     title: "Dogo",
     description: "Encontraste al perrito",
-    image: "/achievements/dog_finder.png",
+    image: "assets/achievement/DOGO@2x.png",
   },
   {
     id: "hidden_gamer",
     title: "Gamer encubierto",
     description: "Usaste WASD para navegar",
-    image: "/achievements/hidden_gamer.png",
+    image: "assets/achievement/GAMER ENCUBIERTO@2x.png",
   },
   {
     id: "easter_egg",
     title: "KEKW",
     description: "Encontraste la sección ?????",
-    image: "/achievements/easter_egg.png",
+    image: "assets/achievement/KEKW@2x.png",
   },
 ];
 
@@ -79,28 +79,28 @@ interface AchievementContextType {
 }
 
 const AchievementContext = createContext<AchievementContextType | undefined>(
-  undefined,
+    undefined
 );
 
 export const useAchievements = () => {
   const context = useContext(AchievementContext);
   if (!context) {
     throw new Error(
-      "useAchievements must be used within an AchievementProvider",
+        "useAchievements must be used within an AchievementProvider"
     );
   }
   return context;
 };
 
 export const AchievementProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+                                                                         children,
+                                                                       }) => {
   const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>(
-    [],
+      []
   );
   const [achievementQueue, setAchievementQueue] = useState<Achievement[]>([]);
   const [currentAchievement, setCurrentAchievement] =
-    useState<Achievement | null>(null);
+      useState<Achievement | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [siteEntryTime] = useState<number>(Date.now());
 
@@ -143,24 +143,23 @@ export const AchievementProvider: React.FC<{ children: ReactNode }> = ({
       }
     };
 
-    // Fix for ESLint no-floating-promises
     void processQueue();
   }, [achievementQueue, isProcessing]);
 
   return (
-    <AchievementContext.Provider
-      value={{ unlockedAchievements, unlockAchievement }}
-    >
-      {children}
-      <AnimatePresence mode="wait">
-        {currentAchievement && (
-          <AchievementDisplay
-            key={currentAchievement.id}
-            achievement={currentAchievement}
-          />
-        )}
-      </AnimatePresence>
-    </AchievementContext.Provider>
+      <AchievementContext.Provider
+          value={{ unlockedAchievements, unlockAchievement }}
+      >
+        {children}
+        <AnimatePresence mode="wait">
+          {currentAchievement && (
+              <AchievementDisplay
+                  key={currentAchievement.id}
+                  achievement={currentAchievement}
+              />
+          )}
+        </AnimatePresence>
+      </AchievementContext.Provider>
   );
 };
 
@@ -169,12 +168,11 @@ interface AchievementDisplayProps {
 }
 
 const AchievementDisplay: React.FC<AchievementDisplayProps> = ({
-  achievement,
-}) => {
+                                                                 achievement,
+                                                               }) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    // Fix for ESLint no-floating-promises
     void controls.start({
       background: [
         "conic-gradient(from 0deg at 50% 50%, #d6fa02 0deg, #e500ee 120deg, #0af3ff 240deg, #d6fa02 360deg)",
@@ -189,46 +187,47 @@ const AchievementDisplay: React.FC<AchievementDisplayProps> = ({
   }, [controls]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: "100%" }}
-      animate={{ opacity: 1, y: "0%" }}
-      exit={{ opacity: 0, y: "100%" }}
-      transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 30,
-        mass: 1,
-        duration: 0.5,
-      }}
-      className="fixed bottom-4 right-4 z-50 w-64 overflow-hidden rounded-2xl p-[3px] shadow-lg"
-      style={{
-        background: `conic-gradient(from 0deg at 50% 50%, 
+      <motion.div
+          initial={{ opacity: 0, y: "100%" }}
+          animate={{ opacity: 1, y: "0%" }}
+          exit={{ opacity: 0, y: "100%" }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 30,
+            mass: 1,
+            duration: 0.5,
+          }}
+          className="fixed bottom-4 right-4 z-50 w-80 overflow-hidden rounded-2xl p-[3px] shadow-lg"
+          style={{
+            background: `conic-gradient(from 0deg at 50% 50%, 
                     #d6fa02 0deg, 
                     #e500ee 120deg, 
                     #0af3ff 240deg, 
                     #d6fa02 360deg)`,
-      }}
-    >
-      <motion.div animate={controls} className="absolute inset-0" />
-      <div className="relative flex items-center rounded-xl bg-black p-4">
-        <div className="flex-grow">
-          <h3 className="mb-1 text-lg font-bold text-primary-cyan">
-            {achievement.title}
-          </h3>
-          <p className="text-xs text-primary-green">
-            {achievement.description}
-          </p>
+          }}
+      >
+        <motion.div animate={controls} className="absolute inset-0" />
+        <div className="relative flex items-center rounded-xl bg-black p-2">
+          <div className="flex-grow">
+            <h3 className="mb-1 text-lg font-bold text-primary-cyan whitespace-nowrap overflow-hidden text-ellipsis">
+              {achievement.title}
+            </h3>
+            <p className="text-xs text-primary-green whitespace-nowrap overflow-hidden text-ellipsis">
+              {achievement.description}
+            </p>
+          </div>
+          <div className="ml-4 h-20 w-20 overflow-hidden rounded-lg">
+            <img
+                src={achievement.image}
+                alt={achievement.title}
+                className="h-full w-full object-cover"
+            />
+          </div>
         </div>
-        <div className="ml-4 flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-primary-darkViolet">
-          <img
-            src={achievement.image}
-            alt={achievement.title}
-            className="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
   );
 };
 
 export default AchievementProvider;
+
