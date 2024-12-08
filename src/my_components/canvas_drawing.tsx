@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useAchievements } from "~/my_components/achievement/achievement";
 
 interface Line {
@@ -14,6 +14,8 @@ interface CanvasDrawingProps {
   onDraw: () => void;
 }
 
+const MINIMUM_DRAW_DISTANCE = 100; // pixels
+
 const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -22,6 +24,7 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
   const linesRef = useRef<Line[]>([]);
   const scrollYRef = useRef(0);
   const hasDrawnRef = useRef(false);
+  const totalDistanceRef = useRef(0);
   const { unlockAchievement } = useAchievements();
 
   useEffect(() => {
@@ -87,41 +90,7 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
     };
   }, []);
 
-  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-    setIsDrawing(true);
-    const point = getPointFromEvent(e);
-    lastPointRef.current = point;
-
-    if (!hasDrawnRef.current) {
-      hasDrawnRef.current = true;
-      unlockAchievement('art_lover');
-      onDraw();
-    }
-  };
-
-  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-    if (!isDrawing) return;
-    const newPoint = getPointFromEvent(e);
-    const newLine: Line = {
-      start: lastPointRef.current!,
-      end: newPoint,
-      hue,
-      timestamp: Date.now(),
-    };
-    linesRef.current.push(newLine);
-
-    setHue((prevHue) => (prevHue + 1) % 360);
-    lastPointRef.current = newPoint;
-  };
-
-  const stopDrawing = () => {
-    setIsDrawing(false);
-    lastPointRef.current = null;
-  };
-
-  const getPointFromEvent = (
-      e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
-  ): { x: number; y: number } => {
+  const getPointFromEvent = useCallback((e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return { x: 0, y: 0 };
 
@@ -138,6 +107,46 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
       };
     }
     return { x: 0, y: 0 };
+  }, []);
+
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    setIsDrawing(true);
+    const point = getPointFromEvent(e);
+    lastPointRef.current = point;
+  };
+
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDrawing) return;
+    const newPoint = getPointFromEvent(e);
+    const newLine: Line = {
+      start: lastPointRef.current!,
+      end: newPoint,
+      hue,
+      timestamp: Date.now(),
+    };
+    linesRef.current.push(newLine);
+
+    // Calculate distance
+    const distance = Math.sqrt(
+        Math.pow(newPoint.x - lastPointRef.current!.x, 2) +
+        Math.pow(newPoint.y - lastPointRef.current!.y, 2)
+    );
+    totalDistanceRef.current += distance;
+
+    // Check if the minimum distance has been reached
+    if (totalDistanceRef.current >= MINIMUM_DRAW_DISTANCE && !hasDrawnRef.current) {
+      hasDrawnRef.current = true;
+      unlockAchievement('art_lover');
+      onDraw();
+    }
+
+    setHue((prevHue) => (prevHue + 1) % 360);
+    lastPointRef.current = newPoint;
+  };
+
+  const stopDrawing = () => {
+    setIsDrawing(false);
+    lastPointRef.current = null;
   };
 
   return (
@@ -156,3 +165,4 @@ const CanvasDrawing: React.FC<CanvasDrawingProps> = ({ onDraw }) => {
 };
 
 export default CanvasDrawing;
+

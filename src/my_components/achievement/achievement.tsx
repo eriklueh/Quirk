@@ -71,6 +71,12 @@ export const achievements: Achievement[] = [
     description: "Encontraste la sección ?????",
     image: "assets/achievement/KEKW@2x.png",
   },
+  {
+    id: "social_butterfly",
+    title: "Oh Stop it You",
+    description: "Tocaste las 4 redes sociales",
+    image: "assets/achievement/OH STOP IT YOU!@2x.png",
+  },
 ];
 
 interface AchievementContextType {
@@ -79,30 +85,27 @@ interface AchievementContextType {
 }
 
 const AchievementContext = createContext<AchievementContextType | undefined>(
-    undefined
+  undefined,
 );
 
 export const useAchievements = () => {
   const context = useContext(AchievementContext);
   if (!context) {
     throw new Error(
-        "useAchievements must be used within an AchievementProvider"
+      "useAchievements must be used within an AchievementProvider",
     );
   }
   return context;
 };
 
-export const AchievementProvider: React.FC<{ children: ReactNode }> = ({
-                                                                         children,
-                                                                       }) => {
-  const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>(
-      []
-  );
+export const AchievementProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+  const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>([]);
   const [achievementQueue, setAchievementQueue] = useState<Achievement[]>([]);
-  const [currentAchievement, setCurrentAchievement] =
-      useState<Achievement | null>(null);
+  const [currentAchievement, setCurrentAchievement] = useState<Achievement | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [siteEntryTime] = useState<number>(Date.now());
+  const [socialMediaInteractions, setSocialMediaInteractions] = useState<Set<string>>(new Set());
+  const [portfolioSectionsViewed, setPortfolioSectionsViewed] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const attentionInterval = setInterval(() => {
@@ -126,6 +129,7 @@ export const AchievementProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+
   useEffect(() => {
     const processQueue = async () => {
       if (achievementQueue.length > 0 && !isProcessing) {
@@ -147,19 +151,22 @@ export const AchievementProvider: React.FC<{ children: ReactNode }> = ({
   }, [achievementQueue, isProcessing]);
 
   return (
-      <AchievementContext.Provider
-          value={{ unlockedAchievements, unlockAchievement }}
-      >
-        {children}
-        <AnimatePresence mode="wait">
-          {currentAchievement && (
-              <AchievementDisplay
-                  key={currentAchievement.id}
-                  achievement={currentAchievement}
-              />
-          )}
-        </AnimatePresence>
-      </AchievementContext.Provider>
+    <AchievementContext.Provider
+      value={{
+        unlockedAchievements,
+        unlockAchievement,
+      }}
+    >
+      {children}
+      <AnimatePresence mode="wait">
+        {currentAchievement && (
+          <AchievementDisplay
+            key={currentAchievement.id}
+            achievement={currentAchievement}
+          />
+        )}
+      </AnimatePresence>
+    </AchievementContext.Provider>
   );
 };
 
@@ -168,8 +175,8 @@ interface AchievementDisplayProps {
 }
 
 const AchievementDisplay: React.FC<AchievementDisplayProps> = ({
-                                                                 achievement,
-                                                               }) => {
+  achievement,
+}) => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -187,47 +194,46 @@ const AchievementDisplay: React.FC<AchievementDisplayProps> = ({
   }, [controls]);
 
   return (
-      <motion.div
-          initial={{ opacity: 0, y: "100%" }}
-          animate={{ opacity: 1, y: "0%" }}
-          exit={{ opacity: 0, y: "100%" }}
-          transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 30,
-            mass: 1,
-            duration: 0.5,
-          }}
-          className="fixed bottom-4 right-4 z-50 w-80 overflow-hidden rounded-2xl p-[3px] shadow-lg"
-          style={{
-            background: `conic-gradient(from 0deg at 50% 50%, 
+    <motion.div
+      initial={{ opacity: 0, y: "100%" }}
+      animate={{ opacity: 1, y: "0%" }}
+      exit={{ opacity: 0, y: "100%" }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 30,
+        mass: 1,
+        duration: 0.5,
+      }}
+      className="fixed bottom-4 right-4 z-50 w-80 overflow-hidden rounded-2xl p-[3px] shadow-lg"
+      style={{
+        background: `conic-gradient(from 0deg at 50% 50%, 
                     #d6fa02 0deg, 
                     #e500ee 120deg, 
                     #0af3ff 240deg, 
                     #d6fa02 360deg)`,
-          }}
-      >
-        <motion.div animate={controls} className="absolute inset-0" />
-        <div className="relative flex items-center rounded-xl bg-black p-2">
-          <div className="flex-grow">
-            <h3 className="mb-1 text-lg font-bold text-primary-cyan whitespace-nowrap overflow-hidden text-ellipsis">
-              {achievement.title}
-            </h3>
-            <p className="text-xs text-primary-green whitespace-nowrap overflow-hidden text-ellipsis">
-              {achievement.description}
-            </p>
-          </div>
-          <div className="ml-4 h-20 w-20 overflow-hidden rounded-lg">
-            <img
-                src={achievement.image}
-                alt={achievement.title}
-                className="h-full w-full object-cover"
-            />
-          </div>
+      }}
+    >
+      <motion.div animate={controls} className="absolute inset-0" />
+      <div className="relative flex items-center rounded-xl bg-black p-2">
+        <div className="flex-grow">
+          <h3 className="mb-1 overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold text-primary-cyan">
+            {achievement.title}
+          </h3>
+          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-primary-green">
+            {achievement.description}
+          </p>
         </div>
-      </motion.div>
+        <div className="ml-4 h-20 w-20 overflow-hidden rounded-lg">
+          <img
+            src={achievement.image}
+            alt={achievement.title}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
 export default AchievementProvider;
-
