@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion"
 import { IconArrowLeft } from "@tabler/icons-react"
-import {assetUrls} from "~/lib/asset-url";
+import { assetUrls } from "~/lib/asset-url";
+
+interface VFXItem {
+    id: string;
+    title: string;
+    videoUrl: string;
+    thumbnailUrl: string;
+}
 
 interface VFXContentProps {
     onItemClick: (itemName: string) => void
@@ -11,14 +18,25 @@ interface VFXContentProps {
 }
 
 export default function VFXContent({ onItemClick, selectedVFX, onBack }: VFXContentProps) {
-    const vfxItems = [
+    const vfxItems: VFXItem[] = [
         {
             id: "1",
             title: "Coco Palm VFX .Quirk ˎˊ˗",
             videoUrl: assetUrls.vfx.cocoPalm,
             thumbnailUrl: "/assets/portfolio/VFX/coco_thumb.png",
         },
-        // More items can be added here in the future
+        {
+            id: "2",
+            title: "Lost Ocean VFX .Quirk ˎˊ˗",
+            videoUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/VFX/VFX_LostOcean_Compressed-UDtqzsojKatsPcB2ZPklW0UQKSfOtD.mp4",
+            thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/VFX/Thumbnail_VFX_LostOcean-DAStvaRqWiDsu4bHh5rHrpys3XqVIx.png",
+        },
+        {
+            id: "3",
+            title: "Underwater VFX .Quirk ˎˊ˗",
+            videoUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/VFX/VFX_Underwater_Compressed-ktY7ATnpzwBoYp7AXUmfttGmjbyl22.mp4",
+            thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/VFX/Thumbnail_VFX_Underwater-OfyTlbQAzOcTIEE3qpOcYd4poOJfJj.png",
+        },
     ];
 
     const selectedItem = vfxItems.find(item => item.title === selectedVFX);

@@ -17,7 +17,14 @@ const games: Game[] = [
         title: " Tori-Torii ",
         thumbnailUrl: "/placeholder.svg?height=150&width=200",
         gameUrl: "https://itch.io/embed-upload/12065538?color=2a2a2a"
+    },
+    {
+        id: "2",
+        title: " Vuelve A Casa ",
+        thumbnailUrl: "/placeholder.svg?height=150&width=200",
+        gameUrl: "https://itch.io/embed-upload/3130267?color=2a2a2a"
     }
+
 ]
 
 interface GamesContentProps {

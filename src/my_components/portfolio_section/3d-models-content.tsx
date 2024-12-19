@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { IconArrowLeft } from "@tabler/icons-react"
+import { IconArrowLeft, IconX } from "@tabler/icons-react"
+import { Dialog, DialogContent, DialogTrigger} from "~/components/ui/dialog";
+
 
 interface Model3D {
     id: string
@@ -11,6 +13,7 @@ interface Model3D {
     embedUrl: string
     author: string
     authorUrl: string
+    galleryImages: string[]
 }
 
 const models: Model3D[] = [
@@ -21,6 +24,12 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/8f6c197c1c7a4e2a83b6eee5fe07cd89/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Minka-1.jpg",
+            "/assets/portfolio/3D/Gallery/Minka-2.jpg",
+            "/assets/portfolio/3D/Gallery/Minka-3.jpg",
+            "/assets/portfolio/3D/Gallery/Minka-4.jpg",
+        ],
     },
     {
         id: "2",
@@ -29,6 +38,12 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/88d903bb272646a1991da50eefbc5282/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Robot-1.jpg",
+            "/assets/portfolio/3D/Gallery/Robot-2.jpg",
+            "/assets/portfolio/3D/Gallery/Robot-3.jpg",
+            "/assets/portfolio/3D/Gallery/Robot-4.jpg",
+        ],
     },
     {
         id: "3",
@@ -37,6 +52,11 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/83a869df5f084f399cb9050018222a59/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Telescope-1.jpg",
+            "/assets/portfolio/3D/Gallery/Telescope-2.jpg",
+            "/assets/portfolio/3D/Gallery/Telescope-3.jpg",
+        ],
     },
     {
         id: "4",
@@ -45,6 +65,12 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/ddba19e6486d456aa31783b6bd9bcbe1/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/NekoPC-1.jpg",
+            "/assets/portfolio/3D/Gallery/NekoPC-2.jpg",
+            "/assets/portfolio/3D/Gallery/NekoPC-3.jpg",
+            "/assets/portfolio/3D/Gallery/NekoPC-4.jpg",
+        ],
     },
     {
         id: "5",
@@ -53,6 +79,11 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/fe0d8c07a7aa4332bb67512eb7efaa6d/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Robobear-1.jpg",
+            "/assets/portfolio/3D/Gallery/Robobear-2.jpg",
+            "/assets/portfolio/3D/Gallery/Robobear-3.jpg",
+        ],
     },
     {
         id: "6",
@@ -61,6 +92,12 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/e5442d3bf20e49c79d982eb6c80235fc/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Chipboy-1.jpg",
+            "/assets/portfolio/3D/Gallery/Chipboy-2.jpg",
+            "/assets/portfolio/3D/Gallery/Chipboy-3.jpg",
+            "/assets/portfolio/3D/Gallery/Chipboy-4.jpg",
+        ],
     },
     {
         id: "7",
@@ -69,6 +106,11 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/3935b47b9d8746b090b92f19e9de5d5d/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/Piano-1.jpg",
+            "/assets/portfolio/3D/Gallery/Piano-2.jpg",
+            "/assets/portfolio/3D/Gallery/Piano-3.jpg",
+        ],
     },
     {
         id: "8",
@@ -77,6 +119,12 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/36d4748f93d2437992e8bdf63b132f78/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/LesPaul-1.jpg",
+            "/assets/portfolio/3D/Gallery/LesPaul-2.jpg",
+            "/assets/portfolio/3D/Gallery/LesPaul-3.jpg",
+            "/assets/portfolio/3D/Gallery/LesPaul-4.jpg",
+        ],
     },
     {
         id: "9",
@@ -85,6 +133,11 @@ const models: Model3D[] = [
         embedUrl: "https://sketchfab.com/models/b6567abcd75c429cb365c92b58ae57f1/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+        galleryImages: [
+            "/assets/portfolio/3D/Gallery/CyberPC-1.jpg",
+            "/assets/portfolio/3D/Gallery/CyberPC-2.jpg",
+            "/assets/portfolio/3D/Gallery/CyberPC-3.jpg",
+        ],
     },
 ];
 
@@ -95,11 +148,18 @@ interface Models3DContentProps {
 }
 
 export default function Models3DContent({ onItemClick, selectedModel, onBack }: Models3DContentProps) {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
     const handleModelClick = (model: Model3D) => {
         onItemClick(model.title)
     }
 
     const currentModel = models.find(model => model.title === selectedModel)
+
+    const handleImageClick = (image: string) => {
+        setSelectedImage(image)
+    }
+
 
     return (
         <div className="w-full">
@@ -109,14 +169,7 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="relative w-full"
-                        style={{
-                            aspectRatio: "16 / 9",
-                            minHeight: "500px",
-                            maxWidth: "800px",
-                            minWidth: "500px",
-                            margin: "0 auto",
-                        }}
+                        className="relative w-full flex"
                     >
                         <button
                             onClick={onBack}
@@ -124,7 +177,11 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                         >
                             <IconArrowLeft size={24} />
                         </button>
-                        <div className="relative h-full w-full overflow-hidden rounded-lg bg-background-darkPurple">
+                        <div className="relative h-full w-3/4 overflow-hidden rounded-lg bg-background-darkPurple" style={{
+                            aspectRatio: "16 / 9",
+                            minHeight: "500px",
+                            maxWidth: "800px",
+                        }}>
                             <iframe
                                 title={currentModel.title}
                                 frameBorder="0"
@@ -137,6 +194,29 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                                 src={currentModel.embedUrl}
                                 className="absolute inset-0 h-full w-full border-0"
                             ></iframe>
+                        </div>
+                        <div className="w-1/4 ml-4 space-y-4">
+                            {currentModel.galleryImages.map((image, index) => (
+                                <Dialog key={index}>
+                                    <DialogTrigger asChild>
+                                        <img
+                                            src={image}
+                                            alt={`${currentModel.title} gallery image ${index + 1}`}
+                                            className="w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity"
+                                            onClick={() => handleImageClick(image)}
+                                        />
+                                    </DialogTrigger>
+                                    <DialogContent className="max-w-[90vw] max-h-[90vh] p-0">
+                                        <div className="relative w-full h-full">
+                                            <img
+                                                src={image}
+                                                alt={`${currentModel.title} gallery image ${index + 1} fullscreen`}
+                                                className="w-full h-full object-contain"
+                                            />
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
+                            ))}
                         </div>
                     </motion.div>
                 ) : (

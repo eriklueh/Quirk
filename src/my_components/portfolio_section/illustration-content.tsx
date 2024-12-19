@@ -105,7 +105,7 @@ export default function IllustrationContent({ onItemClick, selectedIllustration,
                             <img
                                 src={selectedItem.imageUrl}
                                 alt={selectedItem.title}
-                                className="w-full h-auto"
+                                className="w-full h-auto max-h-[70vh] object-contain"
                             />
                             <div className="p-4">
                                 <h3 className="text-xl font-bold text-primary-green mb-2">

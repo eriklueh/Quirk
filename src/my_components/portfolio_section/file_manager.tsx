@@ -17,6 +17,8 @@ import MotionContent from "~/my_components/portfolio_section/motion-content";
 import TreatmentContent from "~/my_components/portfolio_section/treatment-content";
 import IllustrationContent from "~/my_components/portfolio_section/illustration-content";
 import VFXContent from "~/my_components/portfolio_section/vfx-content";
+import QuirkContent from "~/my_components/portfolio_section/quirk-content";
+import MarcasContent from "~/my_components/portfolio_section/marcas-content";
 import { useAchievements } from "~/my_components/achievement/achievement";
 
 interface FileManagerProps {
@@ -47,8 +49,9 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
     "/assets/folders/Recurso 3.svg",
     "/assets/folders/Recurso 4.svg",
     "/assets/folders/Recurso 5.svg",
-    // "/assets/folders/Recurso 6.svg",
     "/assets/folders/Recurso 6.svg",
+    "/assets/folders/Recurso 7.svg",
+    "/assets/folders/Recurso 2.svg",
   ];
 
   const folderNames = [
@@ -57,11 +60,12 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
     "Ilustración",
     "VFX",
     "Tratamiento",
-    // "Animación",
     "Videojuegos",
+    ".Quirk",
+    "Marcas",
   ];
 
-  const itemCounts = [10, 8, 15, 6, 12, 7];
+  const itemCounts = [10, 8, 15, 6, 12, 7, 5, 9];
   const itemDates = [
     "2022-01-01",
     "2021-12-15",
@@ -69,6 +73,8 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
     "2021-11-10",
     "2022-03-05",
     "2022-04-15",
+    "2022-05-20",
+    "2022-06-10",
   ];
 
   const handleFolderClick = (index: number) => {
@@ -107,14 +113,6 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
           {selectedItem && `/${selectedItem}`}
         </p>
         <div className="flex space-x-4">
-          {selectedItem && (
-              <button
-                  onClick={handleBack}
-                  className="text-primary-green transition-colors hover:text-primary-magenta"
-              >
-                <IconArrowLeft size={24} />
-              </button>
-          )}
           <IconLayoutGrid
               className={`cursor-pointer ${isGridView ? "text-primary-green" : "text-gray-500"}`}
               onClick={() => setIsGridView(true)}
@@ -178,6 +176,22 @@ const FileManager: FC<FileManagerProps> = ({ controls }) => {
             <TreatmentContent
                 onItemClick={handleItemClick}
                 selectedTreatment={selectedItem}
+                onBack={handleBack}
+            />
+        );
+      case ".Quirk":
+        return (
+            <QuirkContent
+                onItemClick={handleItemClick}
+                selectedQuirk={selectedItem}
+                onBack={handleBack}
+            />
+        );
+      case "Marcas":
+        return (
+            <MarcasContent
+                onItemClick={handleItemClick}
+                selectedMarca={selectedItem}
                 onBack={handleBack}
             />
         );
