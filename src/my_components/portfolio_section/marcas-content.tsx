@@ -138,7 +138,7 @@ export default function MarcasContent({ onItemClick, selectedMarca, onBack }: Ma
                                         <button
                                             onClick={() => {
                                                 const video = document.querySelector('video');
-                                                if (video) video.requestFullscreen();
+                                                if (video) void video.requestFullscreen();
                                             }}
                                             className="mt-4 px-4 py-2 bg-primary-green text-white rounded hover:bg-primary-magenta transition-colors"
                                         >
