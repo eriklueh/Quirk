@@ -96,6 +96,78 @@ const models: Model3D[] = [
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
     },
+    {
+        id: "11",
+        title: "Stylized Cyber PC .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/PC_Antique-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/b6567abcd75c429cb365c92b58ae57f1/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "12",
+        title: "Guitarra Les Paul Classic .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/LesPaul-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/36d4748f93d2437992e8bdf63b132f78/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "13",
+        title: "Piano Vertical .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Piano-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/3935b47b9d8746b090b92f19e9de5d5d/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "14",
+        title: "Stylized Chip Boy .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Chipboy-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/e5442d3bf20e49c79d982eb6c80235fc/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "15",
+        title: "Stylized Robo-Bear .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robobear-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/fe0d8c07a7aa4332bb67512eb7efaa6d/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "16",
+        title: "Stylized Neko Computer .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/NekoPC-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/ddba19e6486d456aa31783b6bd9bcbe1/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "17",
+        title: "Stylized Telescope .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Telescopio-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/83a869df5f084f399cb9050018222a59/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "18",
+        title: "Stylized Robot .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robot-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/88d903bb272646a1991da50eefbc5282/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
+    {
+        id: "19",
+        title: "Heian Era Minka .Quirk ˎˊ˗",
+        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Minka-Thumbnail.png",
+        embedUrl: "https://sketchfab.com/models/8f6c197c1c7a4e2a83b6eee5fe07cd89/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
+    },
 ];
 
 interface Models3DContentProps {
@@ -105,14 +177,11 @@ interface Models3DContentProps {
 }
 
 export default function Models3DContent({ onItemClick, selectedModel, onBack }: Models3DContentProps) {
-    //const [selectedImage, setSelectedImage] = useState<string | null>(null)
-
     const handleModelClick = (model: Model3D) => {
         onItemClick(model.title)
     }
 
     const currentModel = models.find(model => model.title === selectedModel)
-
 
     return (
         <div className="w-full">
