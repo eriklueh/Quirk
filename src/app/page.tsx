@@ -9,12 +9,25 @@ import CanvasDrawing from "~/my_components/canvas_drawing";
 import { useAchievements } from "~/my_components/achievement/achievement";
 import AboutSection from "~/my_components/about-section";
 import ServerSection from "~/my_components/server-section";
+import MobileView from "~/components/MobileView";
 
 export default function HomePage() {
   const typewriterRef = useRef(null);
   const { unlockAchievement } = useAchievements();
   const hasDrawn = useRef(false);
   const hasUsedKeyboardNav = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -55,6 +68,10 @@ export default function HomePage() {
       hasDrawn.current = true;
     }
   };
+
+  if (isMobile) {
+    return <MobileView />;
+  }
 
   return (
     <main className="flex min-h-screen flex-col bg-background-black">

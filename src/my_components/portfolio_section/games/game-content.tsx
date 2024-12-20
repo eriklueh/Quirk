@@ -15,14 +15,14 @@ const games: Game[] = [
     {
         id: "1",
         title: " Tori-Torii ",
-        thumbnailUrl: "/placeholder.svg?height=150&width=200",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/videojuegos/tori-SscFpwiNIRweTsn7xg0ps1SDJvN1Wl.png",
         gameUrl: "https://itch.io/embed-upload/12065538?color=2a2a2a"
     },
     {
         id: "2",
         title: " Vuelve A Casa ",
-        thumbnailUrl: "/placeholder.svg?height=150&width=200",
-        gameUrl: "https://itch.io/embed-upload/3130267?color=2a2a2a"
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/videojuegos/Kumi2-ERV5A3a6Kimk9t2PuAW04B8iyMQnMP.png",
+        gameUrl: "https://itch.io/embed-upload/12067609?color=333333"
     }
 
 ]

@@ -13,131 +13,88 @@ interface Model3D {
     embedUrl: string
     author: string
     authorUrl: string
-    galleryImages: string[]
 }
 
 const models: Model3D[] = [
     {
         id: "1",
-        title: "Heian Era Minka .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Minka-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/8f6c197c1c7a4e2a83b6eee5fe07cd89/embed",
+        title: "Killjoy",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/Killjoy-Thumbnails-LaUvTBmIkx2ZWKDYqhRcBKPO1Guv7o.png",
+        embedUrl: "https://sketchfab.com/models/ba8e8b8384384d359976a248a9a15a9f/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Minka-1.jpg",
-            "/assets/portfolio/3D/Gallery/Minka-2.jpg",
-            "/assets/portfolio/3D/Gallery/Minka-3.jpg",
-            "/assets/portfolio/3D/Gallery/Minka-4.jpg",
-        ],
     },
     {
         id: "2",
-        title: "Stylized Robot .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robot-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/88d903bb272646a1991da50eefbc5282/embed",
+        title: "Blade",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/blade-Thumbnails-uMgQUCrqNwLT4pW35nLkRFWZ5xuVDO.png",
+        embedUrl: "https://sketchfab.com/models/0f364a4ab69e4c44b34d1358cbe55872/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Robot-1.jpg",
-            "/assets/portfolio/3D/Gallery/Robot-2.jpg",
-            "/assets/portfolio/3D/Gallery/Robot-3.jpg",
-            "/assets/portfolio/3D/Gallery/Robot-4.jpg",
-        ],
     },
     {
         id: "3",
-        title: "Stylized Telescope .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Telescopio-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/83a869df5f084f399cb9050018222a59/embed",
+        title: "PS4 Controller",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/ps4-Thumbnails-DAQ4dHKr6Cn2rara1AQTiySzZX1698.png",
+        embedUrl: "https://sketchfab.com/models/9a6c39df1dbd4fa4bc2600c72de8211a/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Telescope-1.jpg",
-            "/assets/portfolio/3D/Gallery/Telescope-2.jpg",
-            "/assets/portfolio/3D/Gallery/Telescope-3.jpg",
-        ],
     },
     {
         id: "4",
-        title: "Stylized Neko Computer .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/NekoPC-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/ddba19e6486d456aa31783b6bd9bcbe1/embed",
+        title: "Pistol",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/Pistol-Thumbnails-ovCwfq6j70flbbdhYfJ2gmfzUvTwQk.png",
+        embedUrl: "https://sketchfab.com/models/448f06c9944a44408c18fb2033b61c66/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/NekoPC-1.jpg",
-            "/assets/portfolio/3D/Gallery/NekoPC-2.jpg",
-            "/assets/portfolio/3D/Gallery/NekoPC-3.jpg",
-            "/assets/portfolio/3D/Gallery/NekoPC-4.jpg",
-        ],
     },
     {
         id: "5",
-        title: "Stylized Robo-Bear .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Robobear-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/fe0d8c07a7aa4332bb67512eb7efaa6d/embed",
+        title: "Basement",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/Basement-Thumbnail-64pxAUBVaR0S2YbPacgK03EwebVrsc.png",
+        embedUrl: "https://sketchfab.com/models/78989eb831e64b57aadc4ba375e194e4/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Robobear-1.jpg",
-            "/assets/portfolio/3D/Gallery/Robobear-2.jpg",
-            "/assets/portfolio/3D/Gallery/Robobear-3.jpg",
-        ],
     },
     {
         id: "6",
-        title: "Stylized Chip Boy .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Chipboy-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/e5442d3bf20e49c79d982eb6c80235fc/embed",
+        title: "Drums",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/Drums-Thumbnails-4YQaMLkgZDooK1koSgUm6yckqkIxKA.png",
+        embedUrl: "https://sketchfab.com/models/6aa2d55208ac4efd9fd97b3d7e14524f/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Chipboy-1.jpg",
-            "/assets/portfolio/3D/Gallery/Chipboy-2.jpg",
-            "/assets/portfolio/3D/Gallery/Chipboy-3.jpg",
-            "/assets/portfolio/3D/Gallery/Chipboy-4.jpg",
-        ],
     },
     {
         id: "7",
-        title: "Piano Vertical .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/Piano-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/3935b47b9d8746b090b92f19e9de5d5d/embed",
+        title: "CD",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/CD-Thumbnails-ol4E1UkwR7pGlBr7xN7YgFQNnJCSAZ.png",
+        embedUrl: "https://sketchfab.com/models/8e228d599d2b4dabb6320e992e189a0a/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/Piano-1.jpg",
-            "/assets/portfolio/3D/Gallery/Piano-2.jpg",
-            "/assets/portfolio/3D/Gallery/Piano-3.jpg",
-        ],
     },
     {
         id: "8",
-        title: "Guitarra Les Paul Classic .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/LesPaul-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/36d4748f93d2437992e8bdf63b132f78/embed",
+        title: "CD Bag",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/CDBag-Thumbnails-iOSvQxjNHdiNwZOKximpa11YPheLmU.png",
+        embedUrl: "https://sketchfab.com/models/b9764d009e6a4e26a0db9fa344a6337b/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/LesPaul-1.jpg",
-            "/assets/portfolio/3D/Gallery/LesPaul-2.jpg",
-            "/assets/portfolio/3D/Gallery/LesPaul-3.jpg",
-            "/assets/portfolio/3D/Gallery/LesPaul-4.jpg",
-        ],
     },
     {
         id: "9",
-        title: "Stylized Cyber PC .Quirk ˎˊ˗",
-        thumbnailUrl: "/assets/portfolio/3D/Thumbnails/PC_Antique-Thumbnail.png",
-        embedUrl: "https://sketchfab.com/models/b6567abcd75c429cb365c92b58ae57f1/embed",
+        title: "Camera",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/camara-Thumbnails-qlDbhpvCTDs45GVLF9QinNsVoibTv8.png",
+        embedUrl: "https://sketchfab.com/models/89bad87b056e495aaa6f11765702295e/embed",
         author: "Quirk",
         authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
-        galleryImages: [
-            "/assets/portfolio/3D/Gallery/CyberPC-1.jpg",
-            "/assets/portfolio/3D/Gallery/CyberPC-2.jpg",
-            "/assets/portfolio/3D/Gallery/CyberPC-3.jpg",
-        ],
+    },
+    {
+        id: "10",
+        title: "Capsule",
+        thumbnailUrl: "https://gyjvl8bfkxptvsdy.public.blob.vercel-storage.com/3D/capsule-Thumbnails-Z7RexRYaM9ie25mzT799PIplXSlBZx.png",
+        embedUrl: "https://sketchfab.com/models/dbf8d7313b0c42fe9770dba7318771d9/embed",
+        author: "Quirk",
+        authorUrl: "https://sketchfab.com/quirkagenciamultimedial",
     },
 ];
 
@@ -148,17 +105,13 @@ interface Models3DContentProps {
 }
 
 export default function Models3DContent({ onItemClick, selectedModel, onBack }: Models3DContentProps) {
-    const [selectedImage, setSelectedImage] = useState<string | null>(null)
+    //const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
     const handleModelClick = (model: Model3D) => {
         onItemClick(model.title)
     }
 
     const currentModel = models.find(model => model.title === selectedModel)
-
-    const handleImageClick = (image: string) => {
-        setSelectedImage(image)
-    }
 
 
     return (
@@ -169,7 +122,7 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="relative w-full flex"
+                        className="relative w-full"
                     >
                         <button
                             onClick={onBack}
@@ -177,10 +130,11 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                         >
                             <IconArrowLeft size={24} />
                         </button>
-                        <div className="relative h-full w-3/4 overflow-hidden rounded-lg bg-background-darkPurple" style={{
+                        <div className="relative h-full w-full overflow-hidden rounded-lg bg-background-darkPurple" style={{
                             aspectRatio: "16 / 9",
                             minHeight: "500px",
                             maxWidth: "800px",
+                            margin: "0 auto",
                         }}>
                             <iframe
                                 title={currentModel.title}
@@ -194,29 +148,6 @@ export default function Models3DContent({ onItemClick, selectedModel, onBack }: 
                                 src={currentModel.embedUrl}
                                 className="absolute inset-0 h-full w-full border-0"
                             ></iframe>
-                        </div>
-                        <div className="w-1/4 ml-4 space-y-4">
-                            {currentModel.galleryImages.map((image, index) => (
-                                <Dialog key={index}>
-                                    <DialogTrigger asChild>
-                                        <img
-                                            src={image}
-                                            alt={`${currentModel.title} gallery image ${index + 1}`}
-                                            className="w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity"
-                                            onClick={() => handleImageClick(image)}
-                                        />
-                                    </DialogTrigger>
-                                    <DialogContent className="max-w-[90vw] max-h-[90vh] p-0">
-                                        <div className="relative w-full h-full">
-                                            <img
-                                                src={image}
-                                                alt={`${currentModel.title} gallery image ${index + 1} fullscreen`}
-                                                className="w-full h-full object-contain"
-                                            />
-                                        </div>
-                                    </DialogContent>
-                                </Dialog>
-                            ))}
                         </div>
                     </motion.div>
                 ) : (

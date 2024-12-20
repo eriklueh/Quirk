@@ -46,6 +46,10 @@ export default {
         "neon-brightViolet": "#9600f1",
         "neon-orange": "#f4a900",
       },
+      animation: {
+        'scroll-left': 'scroll-left 20s linear infinite',
+        'scroll-right': 'scroll-right 20s linear infinite',
+      },
     },
   },
   plugins: [],
