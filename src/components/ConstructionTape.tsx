@@ -25,6 +25,7 @@ export const ConstructionTape: React.FC<ConstructionTapeProps> = ({
                 "construction-tape relative w-[200%] h-16 flex items-center",
                 direction === "left" ? "animate-scroll-left" : "animate-scroll-right"
             )}>
+                {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
                 {[...Array(10)].map((_, i) => (
                     <div
                         key={i}
